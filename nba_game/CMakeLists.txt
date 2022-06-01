@@ -19,6 +19,11 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        players_list.h
+        players_list.cpp
+        team_window.h
+        team_window.cpp
+        team_window.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

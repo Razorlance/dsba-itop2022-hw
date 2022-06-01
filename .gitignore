@@ -117,3 +117,5 @@ build-nba_game-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeDeterm
 *.log
 
 build-nba_game-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/
+
+all_seasons.csv
