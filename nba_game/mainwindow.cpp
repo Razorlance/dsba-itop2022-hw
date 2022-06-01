@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
       _team_window(new team_window(this))
 {
     ui->setupUi(this);
+    ui->table->verticalHeader()->setVisible(false);
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -41,12 +42,15 @@ void MainWindow::on_actionOpen_triggered()
     // QFile file("D:/Projects/dsba-itop2022-hw/all_seasons.csv");
     if (file.open(QIODevice::ReadOnly))
     {
-        int lineindex = 0;
+        size_t lineindex = 0;
         QTextStream in(&file);
+        QString fileLine = in.readLine();
+        QStringList lineToken = fileLine.split(",", Qt::SkipEmptyParts);
+        model->setHorizontalHeaderLabels(lineToken);
         while (!in.atEnd())
         {
-            QString fileLine = in.readLine();
-            QStringList lineToken = fileLine.split(",", Qt::SkipEmptyParts);
+            fileLine = in.readLine();
+            lineToken = fileLine.split(",", Qt::SkipEmptyParts);
             for (int j = 0; j < lineToken.size(); j++)
             {
                 QString value = lineToken.at(j);
@@ -58,3 +62,5 @@ void MainWindow::on_actionOpen_triggered()
         file.close();
     }
 }
+
+void MainWindow::on_table_customContextMenuRequested(const QPoint &pos) {}
