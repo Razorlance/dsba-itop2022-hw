@@ -1,12 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QDebug>
 #include <QFile>
 #include <QFileDialog>
 #include <QMainWindow>
 #include <QStandardItemModel>
 #include <QTableView>
 
+#include "main_table.h"
 #include "players_list.h"
 #include "team_window.h"
 QT_BEGIN_NAMESPACE
@@ -35,8 +37,11 @@ class MainWindow : public QMainWindow
 
     void on_actionOpen_triggered();
 
+    void on_table_customContextMenuRequested(const QPoint &pos);
+
    protected:
     players_list *_players;
+    main_table *_mtable;
     team_window *_team_window;
 
    private:

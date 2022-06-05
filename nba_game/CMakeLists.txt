@@ -24,6 +24,8 @@ set(PROJECT_SOURCES
         team_window.h
         team_window.cpp
         team_window.ui
+        main_table.h
+        main_table.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

@@ -7,9 +7,11 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
       _players(new players_list(this)),
+      _mtable(new main_table(_players, this)),
       _team_window(new team_window(this))
 {
     ui->setupUi(this);
+    ui->table->setModel(_mtable);
     ui->table->verticalHeader()->setVisible(false);
 }
 
@@ -25,9 +27,6 @@ void MainWindow::on_search_button_clicked() {}
 
 void MainWindow::on_actionOpen_triggered()
 {
-    QStandardItemModel *model = new QStandardItemModel;
-    ui->table->setModel(model);
-    //_players->loadFile("D:/Projects/dsba-itop2022-hw/all_seasons.csv");
     QFile file = QFileDialog::getOpenFileName(
         this,         // parent, is needed to restrict focus of the dlg
         "Open File",  // caption — is shown in the main title of the dlg
@@ -35,32 +34,14 @@ void MainWindow::on_actionOpen_triggered()
         "Text files (*.csv);;All files (*.*)");  // mask which is used for
                                                  // filtering files by their
                                                  // extensions
-
     QFileDialog fd(this, "Open a file", "", "Text Files (*.csv)");
     fd.show();
     fd.exec();
-    // QFile file("D:/Projects/dsba-itop2022-hw/all_seasons.csv");
-    if (file.open(QIODevice::ReadOnly))
-    {
-        size_t lineindex = 0;
-        QTextStream in(&file);
-        QString fileLine = in.readLine();
-        QStringList lineToken = fileLine.split(",", Qt::SkipEmptyParts);
-        model->setHorizontalHeaderLabels(lineToken);
-        while (!in.atEnd())
-        {
-            fileLine = in.readLine();
-            lineToken = fileLine.split(",", Qt::SkipEmptyParts);
-            for (int j = 0; j < lineToken.size(); j++)
-            {
-                QString value = lineToken.at(j);
-                QStandardItem *item = new QStandardItem(value);
-                model->setItem(lineindex, j, item);
-            }
-            lineindex++;
-        }
-        file.close();
-    }
+
+    _mtable->layoutAboutToBeChanged();
+    _players->loadFile(file);
+    _mtable->layoutChanged();
+    // qDebug() << _players->getHeaders();
 }
 
 void MainWindow::on_table_customContextMenuRequested(const QPoint &pos) {}

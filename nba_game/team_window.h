@@ -3,7 +3,8 @@
 
 #include <QDialog>
 
-namespace Ui {
+namespace Ui
+{
 class team_window;
 }
 
@@ -11,12 +12,15 @@ class team_window : public QDialog
 {
     Q_OBJECT
 
-public:
+   public:
     explicit team_window(QWidget *parent = nullptr);
     ~team_window();
 
-private:
+   private slots:
+    void on_pushButton_clicked();
+
+   private:
     Ui::team_window *ui;
 };
 
-#endif // TEAM_WINDOW_H
+#endif  // TEAM_WINDOW_H

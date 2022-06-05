@@ -2,20 +2,25 @@
 #define PLAYERS_LIST_H
 
 #include <QFile>
+#include <QFileDialog>
 #include <QObject>
+#include <QStandardItem>
 #include <QString>
+#include <QTextStream>
 struct Player
 {
     QString name;
-    unsigned int year;
     QString team;
+    unsigned int year;
     unsigned int age;
     double height;
     double weight;
     double pts;
     double reb;
     double ast;
+    QStringList line;
     void fillData(const QStringList& details);
+    QVariant getData(const QModelIndex& indx);
 };
 
 class players_list : public QObject
@@ -25,8 +30,15 @@ class players_list : public QObject
     explicit players_list(QObject* parent = nullptr);
 
    public:
-    bool loadFile(const QString& fileName);
+    bool loadFile(QFile& fileName);
+    int getSize();
+    QVariant getCell(const QModelIndex&);
 
+    QStringList getHeaders();
+
+   protected:
+    QList<Player> players;
+    QStringList headers;
    signals:
 };
 
