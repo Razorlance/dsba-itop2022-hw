@@ -48,4 +48,12 @@ bool players_list::loadFile(QFile& file)
 QVariant players_list::getCell(const QModelIndex& indx)
 {
     return players.at(indx.row()).line.at(indx.column());
-};
+}
+
+void players_list::addToTeam(Player* player)
+{
+    if (team.size() < 16)
+        team.append(*player);
+}
+
+void players_list::deleteFromTeam(Player*){};
