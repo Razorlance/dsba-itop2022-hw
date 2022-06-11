@@ -26,6 +26,14 @@ class MainWindow : public QMainWindow
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
    private slots:
+    void addToTeam();
+
+    void editPlayer();
+
+    void deletePlayer();
+
+    void slotCustomMenuRequested(QPoint);
+
     void on_add_button_clicked();
 
     void on_team_button_clicked();
@@ -36,12 +44,14 @@ class MainWindow : public QMainWindow
 
     void on_actionOpen_triggered();
 
-    void on_table_customContextMenuRequested(const QPoint &pos);
+    void on_table_customContextMenuRequested(QPoint pos);
+    //   public slots:
 
    protected:
     players_list *_players;
     main_table *_mtable;
     team_window *_team_window;
+    QMenu *_menu;
 
    private:
     Ui::MainWindow *ui;
