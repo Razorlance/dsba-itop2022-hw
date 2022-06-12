@@ -53,9 +53,11 @@ class MainWindow : public QMainWindow
    protected:
     players_list *_players;
     main_table *_mtable;
+
     team_window *_team_window;
     player_window *_player_window;
     QMenu *_menu;
+    QSortFilterProxyModel *_proxyModel;
 
    private:
     Ui::MainWindow *ui;

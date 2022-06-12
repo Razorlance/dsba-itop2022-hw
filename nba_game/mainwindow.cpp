@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 
+#include <QRegularExpressionMatch>
+
 #include "./ui_mainwindow.h"
 #include "players_list.h"
 
@@ -9,13 +11,13 @@ MainWindow::MainWindow(QWidget* parent)
       _players(new players_list(this)),
       _mtable(new main_table(_players, this)),
       _team_window(new team_window(_players, this)),
-      _menu(new QMenu(this))
+      _menu(new QMenu(this)),
+      _proxyModel(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
     //    ui->table->setModel(_mtable);
-    QSortFilterProxyModel* proxyModel = new QSortFilterProxyModel(this);
-    proxyModel->setSourceModel(_mtable);
-    ui->table->setModel(proxyModel);
+    _proxyModel->setSourceModel(_mtable);
+    ui->table->setModel(_proxyModel);
     ui->table->setSortingEnabled(true);
     ui->table->verticalHeader()->setVisible(false);
     ui->table->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -28,7 +30,6 @@ MainWindow::MainWindow(QWidget* parent)
     _menu->addAction(addToTeam);
     _menu->addAction(editPlayer);
     _menu->addAction(deletePlayer);
-
     connect(ui->table, SIGNAL(customContextMenuRequested(QPoint)), this,
             SLOT(slotCustomMenuRequested(QPoint)));
 }
@@ -43,7 +44,14 @@ void MainWindow::on_team_button_clicked() { _team_window->show(); }
 
 void MainWindow::on_delete_button_clicked() {}
 
-void MainWindow::on_search_button_clicked() {}
+void MainWindow::on_search_button_clicked()
+{
+    _proxyModel->layoutAboutToBeChanged();
+    _proxyModel->setFilterKeyColumn(1);
+    _proxyModel->setFilterRegularExpression(QRegularExpression(
+        ui->search_input->text(), QRegularExpression::CaseInsensitiveOption));
+    _proxyModel->layoutChanged();
+}
 
 void MainWindow::on_actionOpen_triggered()
 {

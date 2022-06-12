@@ -6,10 +6,10 @@ team_window::team_window(players_list *players, QWidget *parent)
     : QDialog(parent),
       ui(new Ui::team_window),
       _players(players),
-      _tTable(new team_table(players, this))
+      _tTable(new team_table(players, this)),
+      _menu(new QMenu(this))
 {
     ui->setupUi(this);
-
     _tTable->layoutAboutToBeChanged();
     ui->team_table->verticalHeader()->setVisible(false);
     ui->team_table->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -18,6 +18,10 @@ team_window::team_window(players_list *players, QWidget *parent)
     ui->team_ast->setText(QString::number(_players->countAST()));
     ui->team_reb->setText(QString::number(_players->countREB()));
     ui->team_pts->setText(QString::number(_players->countPTS()));
+    QAction *deletePlayer = new QAction("Delete from team", this);
+    connect(deletePlayer, SIGNAL(triggered()), this, SLOT(deletePlayer()));
+    connect(ui->team_table, SIGNAL(customContextMenuRequested(QPoint)), this,
+            SLOT(slotCustomMenuRequested(QPoint)));
     QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
     proxyModel->setSourceModel(_tTable);
     ui->team_table->setModel(proxyModel);
@@ -52,4 +56,16 @@ void team_window::on_save_button_clicked()
 {
     QString name = ui->team_name->text();
     _players->changeTeamName(name);
+}
+
+void team_window::deletePlayer() {}
+
+void team_window::slotCustomMenuRequested(QPoint pos)
+{
+    _menu->popup(ui->team_table->viewport()->mapToGlobal(pos));
+}
+
+void team_window::on_team_table_customContextMenuRequested(const QPoint &pos)
+{
+    _menu->popup(ui->team_table->viewport()->mapToGlobal(pos));
 }

@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QList>
+#include <QMenu>
 #include <QSortFilterProxyModel>
 
 #include "players_list.h"
@@ -29,10 +30,17 @@ class team_window : public QDialog
 
     void on_save_button_clicked();
 
+    void deletePlayer();
+
+    void slotCustomMenuRequested(QPoint);
+
+    void on_team_table_customContextMenuRequested(const QPoint &pos);
+
    private:
     Ui::team_window *ui;
     team_table *_tTable;
     players_list *_players;
+    QMenu *_menu;
 };
 
 #endif  // TEAM_WINDOW_H

@@ -18,7 +18,24 @@ void Player::fillData(const QStringList& details)
     line = details;
 }
 
-QVariant Player::getData(const QModelIndex& indx) { return true; }
+QVariant Player::getData(const QModelIndex& indx)
+{
+    switch (indx.column())
+    {
+        case 0:
+            return id;
+        case 1:
+            return name;
+        case 2:
+            return team;
+        case 3:
+            return age;
+        case 4:
+            return height;
+        case 5:
+            return weight;
+    }
+}
 
 players_list::players_list(QObject* parent)
     : QObject{parent}, team_name{"New team"}

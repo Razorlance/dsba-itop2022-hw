@@ -52,6 +52,9 @@
        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="300,50">
         <item>
          <widget class="QTableView" name="table">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
@@ -71,6 +74,13 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="text">
+             <string>Help</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="team_button">
