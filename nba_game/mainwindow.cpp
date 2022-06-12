@@ -1,7 +1,5 @@
 #include "mainwindow.h"
 
-#include <QRegularExpressionMatch>
-
 #include "./ui_mainwindow.h"
 #include "players_list.h"
 
@@ -38,11 +36,7 @@ MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::slotCustomMenuRequested(QPoint pos) {}
 
-void MainWindow::on_add_button_clicked() {}
-
 void MainWindow::on_team_button_clicked() { _team_window->show(); }
-
-void MainWindow::on_delete_button_clicked() {}
 
 void MainWindow::on_search_button_clicked()
 {
@@ -66,19 +60,21 @@ void MainWindow::addToTeam()
 {
     QPoint p = ui->table->mapFromGlobal(QCursor::pos());
     size_t index = ui->table->indexAt(QPoint(p.x(), p.y())).row() - 1;
+    qDebug() << index;
     _players->addToTeam(index);
-    // qDebug() << index;
 }
 
 void MainWindow::editPlayer()
 {
-    size_t index = ui->table->selectionModel()->selectedRows().at(0).row();
-    size_t id = _players->getPlayer(index).id;
+    //    size_t index =
+    //    ui->table->selectionModel()->selectedRows().at(0).data(); qDebug() <<
+    //    index; size_t id = _players->getPlayer(index).id;
 }
 
 void MainWindow::deletePlayer()
 {
     size_t index = ui->table->selectionModel()->selectedRows().at(0).row();
+    qDebug() << index;
     size_t id = _players->getPlayer(index).id;
     _players->deletePlayer(id);
 }

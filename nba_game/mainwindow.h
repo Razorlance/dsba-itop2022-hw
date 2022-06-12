@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QMainWindow>
+#include <QRegularExpressionMatch>
 #include <QStandardItemModel>
 #include <QTableView>
 
@@ -36,11 +37,7 @@ class MainWindow : public QMainWindow
 
     void slotCustomMenuRequested(QPoint);
 
-    void on_add_button_clicked();
-
     void on_team_button_clicked();
-
-    void on_delete_button_clicked();
 
     void on_search_button_clicked();
 

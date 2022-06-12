@@ -12,7 +12,7 @@ struct Player
     size_t id;
     QString name;
     QString team;
-    unsigned int year;
+    QString year;
     unsigned int age;
     double height;
     double weight;

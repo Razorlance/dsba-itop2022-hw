@@ -3,19 +3,16 @@
 #include <QDebug>
 void Player::fillData(const QStringList& details)
 {
-    if (details.size() < 9)
-        throw std::invalid_argument("Invalid player description");
     id = details[0].toInt();
     name = details[1];
     team = details[2];
-    year = details[21].toInt();
-    age = details[3].toInt();
+    year = details[21];
+    age = details[3].toDouble();
     height = details[4].toDouble();
     weight = details[5].toDouble();
     pts = details[12].toDouble();
     reb = details[13].toDouble();
     ast = details[14].toDouble();
-    line = details;
 }
 
 QVariant Player::getData(const QModelIndex& indx)
@@ -34,6 +31,16 @@ QVariant Player::getData(const QModelIndex& indx)
             return height;
         case 5:
             return weight;
+        case 6:
+            return pts;
+        case 7:
+            return reb;
+        case 8:
+            return ast;
+        case 9:
+            return year;
+        default:
+            return true;
     }
 }
 
@@ -57,8 +64,19 @@ bool players_list::loadFile(QFile& file)
         size_t lineindex = 0;
         QTextStream in(&file);
         QString fileLine = in.readLine();
-        headers = fileLine.split(",", Qt::SkipEmptyParts);
-        // model->setHorizontalHeaderLabels(lineToken);
+        QStringList h = fileLine.split(",", Qt::SkipEmptyParts);
+
+        headers.append(h[0]);
+        headers.append(h[1]);
+        headers.append(h[2]);
+        headers.append(h[3]);
+        headers.append(h[4]);
+        headers.append(h[5]);
+        headers.append(h[12]);
+        headers.append(h[13]);
+        headers.append(h[14]);
+        headers.append(h[21]);
+
         while (!in.atEnd())
         {
             fileLine = in.readLine();
@@ -75,12 +93,20 @@ bool players_list::loadFile(QFile& file)
 }
 QVariant players_list::getCell(const QModelIndex& indx)
 {
-    return players.at(indx.row()).line.at(indx.column());
+    Player p = players.at(indx.row());
+    QVariant data = p.getData(indx);
+    if (data.data())
+        return data;
+    return false;
 }
 
 QVariant players_list::getTeamCell(const QModelIndex& indx)
 {
-    return team.values().at(indx.row()).line.at(indx.column());
+    Player p = team.values().at(indx.row());
+    QVariant data = p.getData(indx);
+    if (data.data())
+        return data;
+    return false;
 }
 
 void players_list::addToTeam(size_t index)

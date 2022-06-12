@@ -3,7 +3,8 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
 class player_window;
 }
 
@@ -11,12 +12,17 @@ class player_window : public QWidget
 {
     Q_OBJECT
 
-public:
+   public:
     explicit player_window(QWidget *parent = nullptr);
     ~player_window();
 
-private:
+   private slots:
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+   private:
     Ui::player_window *ui;
 };
 
-#endif // PLAYER_WINDOW_H
+#endif  // PLAYER_WINDOW_H
