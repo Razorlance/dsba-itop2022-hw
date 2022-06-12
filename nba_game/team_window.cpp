@@ -9,7 +9,7 @@ team_window::team_window(players_list *players, QWidget *parent)
       _tTable(new team_table(players, this))
 {
     ui->setupUi(this);
-    ui->team_table->setModel(_tTable);
+
     _tTable->layoutAboutToBeChanged();
     ui->team_table->verticalHeader()->setVisible(false);
     ui->team_table->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -18,6 +18,10 @@ team_window::team_window(players_list *players, QWidget *parent)
     ui->team_ast->setText(QString::number(_players->countAST()));
     ui->team_reb->setText(QString::number(_players->countREB()));
     ui->team_pts->setText(QString::number(_players->countPTS()));
+    QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
+    proxyModel->setSourceModel(_tTable);
+    ui->team_table->setModel(proxyModel);
+    ui->team_table->setSortingEnabled(true);
 }
 
 team_window::~team_window() { delete ui; }
@@ -26,6 +30,10 @@ void team_window::on_pushButton_clicked()
 {
     QString name = ui->team_name->text();
     _players->changeTeamName(name);
+    ui->team_name->setText(_players->getTeamName());
+    ui->team_ast->setText(QString::number(_players->countAST()));
+    ui->team_reb->setText(QString::number(_players->countREB()));
+    ui->team_pts->setText(QString::number(_players->countPTS()));
     _tTable->layoutAboutToBeChanged();
     this->close();
     _tTable->layoutChanged();

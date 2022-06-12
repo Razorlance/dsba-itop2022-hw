@@ -12,7 +12,11 @@ MainWindow::MainWindow(QWidget* parent)
       _menu(new QMenu(this))
 {
     ui->setupUi(this);
-    ui->table->setModel(_mtable);
+    //    ui->table->setModel(_mtable);
+    QSortFilterProxyModel* proxyModel = new QSortFilterProxyModel(this);
+    proxyModel->setSourceModel(_mtable);
+    ui->table->setModel(proxyModel);
+    ui->table->setSortingEnabled(true);
     ui->table->verticalHeader()->setVisible(false);
     ui->table->setContextMenuPolicy(Qt::CustomContextMenu);
     QAction* addToTeam = new QAction("Add to team", this);
@@ -24,6 +28,7 @@ MainWindow::MainWindow(QWidget* parent)
     _menu->addAction(addToTeam);
     _menu->addAction(editPlayer);
     _menu->addAction(deletePlayer);
+
     connect(ui->table, SIGNAL(customContextMenuRequested(QPoint)), this,
             SLOT(slotCustomMenuRequested(QPoint)));
 }

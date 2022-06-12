@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QList>
+#include <QSortFilterProxyModel>
 
 #include "players_list.h"
 #include "team_table.h"

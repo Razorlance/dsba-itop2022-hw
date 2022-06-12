@@ -47,7 +47,6 @@ class MainWindow : public QMainWindow
     void on_actionOpen_triggered();
 
     void on_table_customContextMenuRequested(QPoint pos);
-    //   public slots:
 
     void on_table_doubleClicked(const QModelIndex &index);
 
