@@ -20,12 +20,17 @@ void Player::fillData(const QStringList& details)
 
 QVariant Player::getData(const QModelIndex& indx) { return true; }
 
-players_list::players_list(QObject* parent) : QObject{parent} {}
+players_list::players_list(QObject* parent)
+    : QObject{parent}, team_name{"New team"}
+{
+}
 QStringList players_list::getHeaders() { return headers; }
 
 Player players_list::getPlayer(size_t index) { return players.at(index); }
 
-QList<Player> players_list::getTeam() { return team; };
+QString players_list::getTeamName() { return team_name; }
+
+QSet<Player> players_list::getTeam() { return team; };
 int players_list::getSize() { return players.size(); }
 
 bool players_list::loadFile(QFile& file)
@@ -58,14 +63,15 @@ QVariant players_list::getCell(const QModelIndex& indx)
 
 QVariant players_list::getTeamCell(const QModelIndex& indx)
 {
-    return team.at(indx.row()).line.at(indx.column());
+    return team.values().at(indx.row()).line.at(indx.column());
 }
 
 void players_list::addToTeam(size_t index)
 {
     if (team.size() < 15)
     {
-        team.append(players.at(index));
+        Player p = players.at(index);
+        team.insert(p);
         // qDebug() << players.at(index).name;
     }
 }
@@ -80,4 +86,54 @@ void players_list::deletePlayer(size_t id)
             players.erase(&p);
     }
     //    players.removeAt(pos);
+}
+
+void players_list::changeTeamName(QString& name)
+{
+    if (name != "")
+        team_name = name;
+}
+
+double players_list::countPTS()
+{
+    double pts = 0;
+    size_t count = 0;
+    for (const Player& p : team)
+    {
+        pts += p.pts;
+        count++;
+    }
+    if (count != 0)
+        return pts / count;
+    else
+        return pts;
+}
+
+double players_list::countREB()
+{
+    double reb = 0;
+    size_t count = 0;
+    for (const Player& p : team)
+    {
+        reb += p.reb;
+        count++;
+    }
+    if (count != 0)
+        return reb / count;
+    return reb;
+}
+
+double players_list::countAST()
+{
+    double ast = 0;
+    size_t count = 0;
+    for (const Player& p : team)
+    {
+        ast += p.reb;
+        count++;
+    }
+    if (count != 0)
+        return ast / count;
+    else
+        return ast;
 };

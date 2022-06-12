@@ -53,9 +53,8 @@ void MainWindow::addToTeam()
 {
     QPoint p = ui->table->mapFromGlobal(QCursor::pos());
     size_t index = ui->table->indexAt(QPoint(p.x(), p.y())).row() - 1;
-    qDebug() << index;
     _players->addToTeam(index);
-    qDebug() << index;
+    // qDebug() << index;
 }
 
 void MainWindow::editPlayer()

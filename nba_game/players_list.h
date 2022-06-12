@@ -38,15 +38,30 @@ class players_list : public QObject
     void addToTeam(size_t);
     void deleteFromTeam(Player*);
     void deletePlayer(size_t);
+    void changeTeamName(QString&);
+    double countPTS();
+    double countREB();
+    double countAST();
     QStringList getHeaders();
     Player getPlayer(size_t);
-    QList<Player> getTeam();
+    QString getTeamName();
+    QSet<Player> getTeam();
 
    protected:
     QList<Player> players;
-    QList<Player> team;
+    QSet<Player> team;
     QStringList headers;
+    QString team_name;
    signals:
 };
+inline bool operator==(const Player& e1, const Player& e2)
+{
+    return e1.id == e2.id;
+}
+
+inline uint qHash(const Player& key, uint seed)
+{
+    return qHash(key.id, seed) ^ key.age;
+}
 
 #endif  // PLAYERS_LIST_H

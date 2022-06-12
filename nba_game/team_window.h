@@ -24,10 +24,14 @@ class team_window : public QDialog
    private slots:
     void on_pushButton_clicked();
 
+    void on_update_button_clicked();
+
+    void on_save_button_clicked();
+
    private:
     Ui::team_window *ui;
     team_table *_tTable;
-    QList<Player> _players;
+    players_list *_players;
 };
 
 #endif  // TEAM_WINDOW_H
