@@ -9,8 +9,10 @@
 #include <QTableView>
 
 #include "main_table.h"
+#include "player_window.h"
 #include "players_list.h"
 #include "team_window.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui
 {
@@ -47,10 +49,13 @@ class MainWindow : public QMainWindow
     void on_table_customContextMenuRequested(QPoint pos);
     //   public slots:
 
+    void on_table_doubleClicked(const QModelIndex &index);
+
    protected:
     players_list *_players;
     main_table *_mtable;
     team_window *_team_window;
+    player_window *_player_window;
     QMenu *_menu;
 
    private:

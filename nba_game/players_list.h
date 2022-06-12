@@ -34,11 +34,13 @@ class players_list : public QObject
     bool loadFile(QFile& fileName);
     int getSize();
     QVariant getCell(const QModelIndex&);
+    QVariant getTeamCell(const QModelIndex&);
     void addToTeam(size_t);
     void deleteFromTeam(Player*);
     void deletePlayer(size_t);
     QStringList getHeaders();
     Player getPlayer(size_t);
+    QList<Player> getTeam();
 
    protected:
     QList<Player> players;

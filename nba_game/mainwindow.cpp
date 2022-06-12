@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget* parent)
       ui(new Ui::MainWindow),
       _players(new players_list(this)),
       _mtable(new main_table(_players, this)),
-      _team_window(new team_window(this)),
+      _team_window(new team_window(_players, this)),
       _menu(new QMenu(this))
 {
     ui->setupUi(this);
@@ -55,6 +55,7 @@ void MainWindow::addToTeam()
     size_t index = ui->table->indexAt(QPoint(p.x(), p.y())).row() - 1;
     qDebug() << index;
     _players->addToTeam(index);
+    qDebug() << index;
 }
 
 void MainWindow::editPlayer()
@@ -74,3 +75,5 @@ void MainWindow::on_table_customContextMenuRequested(QPoint pos)
 {
     _menu->popup(ui->table->viewport()->mapToGlobal(pos));
 }
+
+void MainWindow::on_table_doubleClicked(const QModelIndex& index) {}

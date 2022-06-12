@@ -23,7 +23,9 @@ QVariant Player::getData(const QModelIndex& indx) { return true; }
 players_list::players_list(QObject* parent) : QObject{parent} {}
 QStringList players_list::getHeaders() { return headers; }
 
-Player players_list::getPlayer(size_t index) { return players.at(index); };
+Player players_list::getPlayer(size_t index) { return players.at(index); }
+
+QList<Player> players_list::getTeam() { return team; };
 int players_list::getSize() { return players.size(); }
 
 bool players_list::loadFile(QFile& file)
@@ -52,6 +54,11 @@ bool players_list::loadFile(QFile& file)
 QVariant players_list::getCell(const QModelIndex& indx)
 {
     return players.at(indx.row()).line.at(indx.column());
+}
+
+QVariant players_list::getTeamCell(const QModelIndex& indx)
+{
+    return team.at(indx.row()).line.at(indx.column());
 }
 
 void players_list::addToTeam(size_t index)
