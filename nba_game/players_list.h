@@ -36,7 +36,7 @@ class players_list : public QObject
     QVariant getCell(const QModelIndex&);
     QVariant getTeamCell(const QModelIndex&);
     void addToTeam(size_t);
-    void deleteFromTeam(Player*);
+    void deleteFromTeam(size_t);
     void deletePlayer(size_t);
     void changeTeamName(QString&);
     double countPTS();

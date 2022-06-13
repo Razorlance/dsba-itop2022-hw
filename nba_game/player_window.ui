@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>player_window</class>
  <widget class="QWidget" name="player_window">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>565</width>
-    <height>640</height>
-   </rect>
-  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -43,7 +35,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_2">
+        <widget class="QLineEdit" name="name_field">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -66,7 +58,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_4">
+        <widget class="QLineEdit" name="team_field">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -93,7 +85,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_3">
+            <widget class="QLineEdit" name="year_field">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -116,7 +108,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_5">
+            <widget class="QLineEdit" name="age_field">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -147,7 +139,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_7">
+            <widget class="QLineEdit" name="height_field">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -170,7 +162,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_8">
+            <widget class="QLineEdit" name="weight_field">
              <property name="enabled">
               <bool>false</bool>
              </property>

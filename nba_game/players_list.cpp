@@ -13,6 +13,7 @@ void Player::fillData(const QStringList& details)
     pts = details[12].toDouble();
     reb = details[13].toDouble();
     ast = details[14].toDouble();
+    line = details;
 }
 
 QVariant Player::getData(const QModelIndex& indx)
@@ -40,7 +41,7 @@ QVariant Player::getData(const QModelIndex& indx)
         case 9:
             return year;
         default:
-            return true;
+            return "";
     }
 }
 
@@ -97,9 +98,8 @@ QVariant players_list::getCell(const QModelIndex& indx)
     QVariant data = p.getData(indx);
     if (data.data())
         return data;
-    return false;
+    return QVariant();
 }
-
 QVariant players_list::getTeamCell(const QModelIndex& indx)
 {
     Player p = team.values().at(indx.row());
@@ -119,15 +119,21 @@ void players_list::addToTeam(size_t index)
     }
 }
 
-void players_list::deleteFromTeam(Player*) {}
+void players_list::deleteFromTeam(size_t id)
+{
+    team.erase(team.find(getPlayer(id)));
+}
 
 void players_list::deletePlayer(size_t id)
 {
-    for (Player& p : players)
-    {
-        if (p.id == id)
-            players.erase(&p);
-    }
+    players.erase(players.begin() + id, players.begin() + id + 1);
+    //    for (size_t i = 0; i < players.size(); i++)
+    //    {
+    //        if (players[i].id == id)
+    //        {
+    //            players.removeAt(i);
+    //        }
+    //    }
     //    players.removeAt(pos);
 }
 

@@ -47,12 +47,17 @@ class MainWindow : public QMainWindow
 
     void on_table_doubleClicked(const QModelIndex &index);
 
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
    protected:
     players_list *_players;
     main_table *_mtable;
 
     team_window *_team_window;
     player_window *_player_window;
+
     QMenu *_menu;
     QSortFilterProxyModel *_proxyModel;
 

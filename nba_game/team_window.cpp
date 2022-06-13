@@ -22,6 +22,7 @@ team_window::team_window(players_list *players, QWidget *parent)
     connect(deletePlayer, SIGNAL(triggered()), this, SLOT(deletePlayer()));
     connect(ui->team_table, SIGNAL(customContextMenuRequested(QPoint)), this,
             SLOT(slotCustomMenuRequested(QPoint)));
+    _menu->addAction(deletePlayer);
     QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
     proxyModel->setSourceModel(_tTable);
     ui->team_table->setModel(proxyModel);
@@ -58,7 +59,14 @@ void team_window::on_save_button_clicked()
     _players->changeTeamName(name);
 }
 
-void team_window::deletePlayer() {}
+void team_window::deletePlayer()
+{
+    size_t index = ui->team_table->selectionModel()->selectedRows().at(0).row();
+    size_t id = ui->team_table->model()
+                    ->data(ui->team_table->model()->index(index, 0))
+                    .toInt();
+    _players->deleteFromTeam(id);
+}
 
 void team_window::slotCustomMenuRequested(QPoint pos)
 {

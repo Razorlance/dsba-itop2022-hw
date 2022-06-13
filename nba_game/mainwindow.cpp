@@ -21,13 +21,14 @@ MainWindow::MainWindow(QWidget* parent)
     ui->table->setContextMenuPolicy(Qt::CustomContextMenu);
     QAction* addToTeam = new QAction("Add to team", this);
     QAction* editPlayer = new QAction("Edit", this);
-    QAction* deletePlayer = new QAction("Delete", this);
+    //    QAction* deletePlayer = new QAction("Delete", this);
     connect(addToTeam, SIGNAL(triggered()), this, SLOT(addToTeam()));
     connect(editPlayer, SIGNAL(triggered()), this, SLOT(editPlayer()));
-    connect(deletePlayer, SIGNAL(triggered()), this, SLOT(deletePlayer()));
+    //    connect(deletePlayer, SIGNAL(triggered()), this,
+    //    SLOT(deletePlayer()));
     _menu->addAction(addToTeam);
     _menu->addAction(editPlayer);
-    _menu->addAction(deletePlayer);
+    //    _menu->addAction(deletePlayer);
     connect(ui->table, SIGNAL(customContextMenuRequested(QPoint)), this,
             SLOT(slotCustomMenuRequested(QPoint)));
 }
@@ -58,10 +59,10 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::addToTeam()
 {
-    QPoint p = ui->table->mapFromGlobal(QCursor::pos());
-    size_t index = ui->table->indexAt(QPoint(p.x(), p.y())).row() - 1;
-    qDebug() << index;
-    _players->addToTeam(index);
+    size_t index = ui->table->selectionModel()->selectedRows().at(0).row();
+    size_t id =
+        ui->table->model()->data(ui->table->model()->index(index, 0)).toInt();
+    _players->addToTeam(id);
 }
 
 void MainWindow::editPlayer()
@@ -74,9 +75,11 @@ void MainWindow::editPlayer()
 void MainWindow::deletePlayer()
 {
     size_t index = ui->table->selectionModel()->selectedRows().at(0).row();
-    qDebug() << index;
-    size_t id = _players->getPlayer(index).id;
+    size_t id =
+        ui->table->model()->data(ui->table->model()->index(index, 0)).toInt();
+    _proxyModel->layoutAboutToBeChanged();
     _players->deletePlayer(id);
+    _proxyModel->layoutChanged();
 }
 
 void MainWindow::on_table_customContextMenuRequested(QPoint pos)
@@ -84,4 +87,23 @@ void MainWindow::on_table_customContextMenuRequested(QPoint pos)
     _menu->popup(ui->table->viewport()->mapToGlobal(pos));
 }
 
-void MainWindow::on_table_doubleClicked(const QModelIndex& index) {}
+void MainWindow::on_table_doubleClicked(const QModelIndex& indx)
+{
+    size_t index = ui->table->selectionModel()->selectedRows().at(0).row();
+    size_t id =
+        ui->table->model()->data(ui->table->model()->index(index, 0)).toInt();
+    player_window* pWindow = new player_window(_players, id, this);
+    pWindow->show();
+}
+
+void MainWindow::on_pushButton_clicked() {}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    ui->search_input->setText("");
+    _proxyModel->layoutAboutToBeChanged();
+    _proxyModel->setFilterKeyColumn(1);
+    _proxyModel->setFilterRegularExpression(QRegularExpression(
+        ui->search_input->text(), QRegularExpression::CaseInsensitiveOption));
+    _proxyModel->layoutChanged();
+}
