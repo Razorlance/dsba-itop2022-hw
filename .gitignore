@@ -101,3 +101,21 @@ Thumbs.db
 *.dll
 *.exe
 
+
+build-nba_game-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/.cmake/api/v1/query/
+
+build-nba_game-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/.cmake/api/v1/reply/
+
+build-nba_game-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/.qtc_clangd/.cache/clangd/index/
+
+build-nba_game-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/.qtc_clangd/
+
+build-nba_game-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/CMakeFiles/3.21.1/CMakeDetermineCompilerABI_CXX.bin
+
+*.cmake
+
+*.log
+
+build-nba_game-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/
+
+all_seasons.csv
