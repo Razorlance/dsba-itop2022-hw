@@ -64,6 +64,12 @@ void MainWindow::addToTeam()
     size_t id =
         ui->table->model()->data(ui->table->model()->index(index, 0)).toInt();
     _players->addToTeam(id);
+    if (_players->getTeam().size() == 15)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Maximum players in the team");
+        msgBox.exec();
+    }
 }
 
 void MainWindow::editPlayer()
@@ -85,7 +91,8 @@ void MainWindow::deletePlayer()
 
 void MainWindow::on_table_customContextMenuRequested(QPoint pos)
 {
-    _menu->popup(ui->table->viewport()->mapToGlobal(pos));
+    if (ui->table->selectionModel()->selectedRows().size() > 0)
+        _menu->popup(ui->table->viewport()->mapToGlobal(pos));
 }
 
 void MainWindow::on_table_doubleClicked(const QModelIndex& indx)

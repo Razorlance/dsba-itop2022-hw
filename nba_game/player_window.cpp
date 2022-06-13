@@ -17,6 +17,4 @@ player_window::player_window(players_list* players, size_t id, QWidget* parent)
 
 player_window::~player_window() { delete ui; }
 
-void player_window::on_pushButton_clicked() {}
-
-void player_window::on_pushButton_2_clicked() {}
+void player_window::on_close_button1_clicked() { this->close(); }

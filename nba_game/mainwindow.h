@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QRegularExpressionMatch>
 #include <QStandardItemModel>
 #include <QTableView>

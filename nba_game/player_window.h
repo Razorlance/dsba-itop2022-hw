@@ -20,9 +20,8 @@ class player_window : public QDialog
     ~player_window();
 
    private slots:
-    void on_pushButton_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_close_button1_clicked();
 
    private:
     Ui::player_window *ui;
