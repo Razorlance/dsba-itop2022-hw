@@ -20,8 +20,11 @@ struct Player
     double reb;
     double ast;
     QStringList line;
+    QString is_captain;
+    QString in_rotation;
     void fillData(const QStringList& details);
     QVariant getData(const QModelIndex& indx);
+    QVariant getTeamData(const QModelIndex& indx);
 };
 
 class players_list : public QObject
@@ -42,15 +45,19 @@ class players_list : public QObject
     double countPTS();
     double countREB();
     double countAST();
+    void toggle_captain();
     QStringList getHeaders();
+    QStringList getTeamHeaders();
     Player getPlayer(size_t);
     QString getTeamName();
     QSet<Player> getTeam();
 
    protected:
+    bool one_captain;
     QList<Player> players;
     QSet<Player> team;
     QStringList headers;
+    QStringList team_headers;
     QString team_name;
    signals:
 };

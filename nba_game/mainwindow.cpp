@@ -97,8 +97,6 @@ void MainWindow::on_table_doubleClicked(const QModelIndex& indx)
     pWindow->show();
 }
 
-void MainWindow::on_pushButton_clicked() { _help_window->show(); }
-
 void MainWindow::on_pushButton_2_clicked()
 {
     ui->search_input->setText("");
@@ -108,3 +106,22 @@ void MainWindow::on_pushButton_2_clicked()
         ui->search_input->text(), QRegularExpression::CaseInsensitiveOption));
     _proxyModel->layoutChanged();
 }
+
+void MainWindow::on_compare_button_clicked()
+{
+    if (ui->table->selectionModel()->selectedRows().size() == 2)
+    {
+        size_t index1 = ui->table->selectionModel()->selectedRows().at(0).row();
+        size_t id1 = ui->table->model()
+                         ->data(ui->table->model()->index(index1, 0))
+                         .toInt();
+        size_t index2 = ui->table->selectionModel()->selectedRows().at(1).row();
+        size_t id2 = ui->table->model()
+                         ->data(ui->table->model()->index(index2, 0))
+                         .toInt();
+        compare_window* cWindow = new compare_window(_players, id1, id2, this);
+        cWindow->show();
+    }
+}
+
+void MainWindow::on_help_button_clicked() { _help_window->show(); }

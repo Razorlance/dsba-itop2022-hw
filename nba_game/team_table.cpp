@@ -10,7 +10,7 @@ int team_table::rowCount(const QModelIndex& parent) const
 };
 int team_table::columnCount(const QModelIndex& parent) const
 {
-    return _players->getHeaders().size();
+    return _players->getTeamHeaders().size();
 };
 
 QVariant team_table::data(const QModelIndex& indx, int role) const
@@ -25,6 +25,6 @@ QVariant team_table::headerData(int section, Qt::Orientation orientation,
     if (role != Qt::DisplayRole)
         return QVariant();
     if (orientation == Qt::Horizontal)
-        return _players->getHeaders().at(section);
+        return _players->getTeamHeaders().at(section);
     return QVariant();
 };

@@ -13,7 +13,8 @@ void Player::fillData(const QStringList& details)
     pts = details[12].toDouble();
     reb = details[13].toDouble();
     ast = details[14].toDouble();
-    line = details;
+    in_rotation = "NO";
+    is_captain = "NO";
 }
 
 QVariant Player::getData(const QModelIndex& indx)
@@ -44,12 +45,47 @@ QVariant Player::getData(const QModelIndex& indx)
             return "";
     }
 }
+QVariant Player::getTeamData(const QModelIndex& indx)
+{
+    switch (indx.column())
+    {
+        case 0:
+            return id;
+        case 1:
+            return name;
+        case 2:
+            return team;
+        case 3:
+            return age;
+        case 4:
+            return height;
+        case 5:
+            return weight;
+        case 6:
+            return pts;
+        case 7:
+            return reb;
+        case 8:
+            return ast;
+        case 9:
+            return year;
+        case 10:
+            return is_captain;
+        case 11:
+            return in_rotation;
+        default:
+            return "";
+    }
+}
 
 players_list::players_list(QObject* parent)
     : QObject{parent}, team_name{"New team"}
 {
 }
+
 QStringList players_list::getHeaders() { return headers; }
+
+QStringList players_list::getTeamHeaders() { return team_headers; }
 
 Player players_list::getPlayer(size_t index) { return players.at(index); }
 
@@ -77,6 +113,11 @@ bool players_list::loadFile(QFile& file)
         headers.append(h[13]);
         headers.append(h[14]);
         headers.append(h[21]);
+        for (QString i : headers)
+            team_headers.append(i);
+
+        team_headers.append("is_captain");
+        team_headers.append("in_rotation");
 
         while (!in.atEnd())
         {
@@ -103,7 +144,7 @@ QVariant players_list::getCell(const QModelIndex& indx)
 QVariant players_list::getTeamCell(const QModelIndex& indx)
 {
     Player p = team.values().at(indx.row());
-    QVariant data = p.getData(indx);
+    QVariant data = p.getTeamData(indx);
     if (data.data())
         return data;
     return false;
@@ -185,4 +226,8 @@ double players_list::countAST()
         return ast / count;
     else
         return ast;
+}
+
+void players_list::toggle_captain(){
+
 };

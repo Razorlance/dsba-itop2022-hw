@@ -12,29 +12,27 @@ help_window::~help_window() { delete ui; }
 
 void help_window::paintEvent(QPaintEvent *event)
 {
-    QPainter painter(
-        this);  // this - QPaintDevice; inheritance hierarchy: RomaWidget ->
-                // (QWidget -> (QObject, QPaintDevice))
+    QPainter painter(this);
+    QPen pen(Qt::white, 10, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QRadialGradient radialGrad(QPointF(240, 320), 200);
+    QBrush backBrush(radialGrad);
+    QFont font = painter.font();
 
-    painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+    painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing,
+                           true);
 
-    QRadialGradient radialGrad(QPointF(370, 270), 300);
-    radialGrad.setColorAt(0, Qt::GlobalColor::white);
-    radialGrad.setColorAt(1, QColor(0, 172, 238));  // (255, 192, 203)
-    radialGrad.setColorAt(0.5, QColor(192, 192, 192));
-    radialGrad.centerRadius();
+    radialGrad.setColorAt(0.2, QColor(53, 21, 176));
+    radialGrad.setColorAt(0.4, Qt::GlobalColor::white);
+    radialGrad.setColorAt(0.8, QColor(255, 0, 0));
 
-    QBrush backgroundBrush(radialGrad);
-    painter.setBrush(backgroundBrush);
+    painter.setBrush(backBrush);
     painter.drawRect(QRect(0, 0, width() - 1, height() - 1));
 
-    QTextDocument doc;
-    doc.setTextWidth(width());
-    doc.setHtml(
-        "<center><font size=10 color=\"#196F3D\">Kak tebe takoe, Elon "
-        "Musk?!?</font></center>");
-    doc.drawContents(&painter, QRectF(0, 0, width() - 1, height() - 1));
-    // painter.drawText()
-    // painter.drawText(QRectF(0, 0, width() - 1, height() - 1), Qt::AlignCenter
-    // | Qt::AlignTop, doc);
+    painter.setPen(pen);
+    painter.drawEllipse(QPointF(240, 320), 190, 190);
+    painter.drawEllipse(QPointF(240, 320), 120, 120);
+
+    font.setPixelSize(40);
+    painter.setFont(font);
+    painter.drawText(QPointF(180, 335), "SPORT");
 }

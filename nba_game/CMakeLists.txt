@@ -34,6 +34,9 @@ set(PROJECT_SOURCES
         help_window.h
         help_window.cpp
         help_window.ui
+        compare_window.h
+        compare_window.cpp
+        compare_window.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

@@ -9,6 +9,7 @@
 #include <QStandardItemModel>
 #include <QTableView>
 
+#include "compare_window.h"
 #include "help_window.h"
 #include "main_table.h"
 #include "player_window.h"
@@ -48,9 +49,11 @@ class MainWindow : public QMainWindow
 
     void on_table_doubleClicked(const QModelIndex &index);
 
-    void on_pushButton_clicked();
-
     void on_pushButton_2_clicked();
+
+    void on_compare_button_clicked();
+
+    void on_help_button_clicked();
 
    protected:
     players_list *_players;
@@ -59,6 +62,7 @@ class MainWindow : public QMainWindow
     team_window *_team_window;
     player_window *_player_window;
     help_window *_help_window;
+    compare_window *_compare_window;
 
     QMenu *_menu;
     QSortFilterProxyModel *_proxyModel;
