@@ -31,6 +31,9 @@ set(PROJECT_SOURCES
         player_window.ui
         team_table.h
         team_table.cpp
+        help_window.h
+        help_window.cpp
+        help_window.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

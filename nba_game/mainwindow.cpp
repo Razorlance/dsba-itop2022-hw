@@ -10,7 +10,8 @@ MainWindow::MainWindow(QWidget* parent)
       _mtable(new main_table(_players, this)),
       _team_window(new team_window(_players, this)),
       _menu(new QMenu(this)),
-      _proxyModel(new QSortFilterProxyModel(this))
+      _proxyModel(new QSortFilterProxyModel(this)),
+      _help_window(new help_window(this))
 {
     ui->setupUi(this);
     //    ui->table->setModel(_mtable);
@@ -96,7 +97,7 @@ void MainWindow::on_table_doubleClicked(const QModelIndex& indx)
     pWindow->show();
 }
 
-void MainWindow::on_pushButton_clicked() {}
+void MainWindow::on_pushButton_clicked() { _help_window->show(); }
 
 void MainWindow::on_pushButton_2_clicked()
 {

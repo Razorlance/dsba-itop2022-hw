@@ -9,6 +9,7 @@
 #include <QStandardItemModel>
 #include <QTableView>
 
+#include "help_window.h"
 #include "main_table.h"
 #include "player_window.h"
 #include "players_list.h"
@@ -57,6 +58,7 @@ class MainWindow : public QMainWindow
 
     team_window *_team_window;
     player_window *_player_window;
+    help_window *_help_window;
 
     QMenu *_menu;
     QSortFilterProxyModel *_proxyModel;
