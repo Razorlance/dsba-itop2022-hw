@@ -11,7 +11,7 @@ team_window::team_window(players_list *players, QWidget *parent)
 {
     ui->setupUi(this);
     _tTable->layoutAboutToBeChanged();
-    ui->team_table->verticalHeader()->setVisible(false);
+    ui->team_table->verticalHeader()->setVisible(true);
     ui->team_table->setContextMenuPolicy(Qt::CustomContextMenu);
     _tTable->layoutChanged();
     ui->team_name->setText(_players->getTeamName());
@@ -65,7 +65,9 @@ void team_window::deletePlayer()
     size_t id = ui->team_table->model()
                     ->data(ui->team_table->model()->index(index, 0))
                     .toInt();
+    _tTable->layoutAboutToBeChanged();
     _players->deleteFromTeam(id);
+    _tTable->layoutChanged();
 }
 
 void team_window::slotCustomMenuRequested(QPoint pos)

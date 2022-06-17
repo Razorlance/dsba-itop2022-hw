@@ -14,22 +14,14 @@ MainWindow::MainWindow(QWidget* parent)
       _help_window(new help_window(this))
 {
     ui->setupUi(this);
-    //    ui->table->setModel(_mtable);
     _proxyModel->setSourceModel(_mtable);
     ui->table->setModel(_proxyModel);
     ui->table->setSortingEnabled(true);
     ui->table->verticalHeader()->setVisible(false);
     ui->table->setContextMenuPolicy(Qt::CustomContextMenu);
     QAction* addToTeam = new QAction("Add to team", this);
-    QAction* editPlayer = new QAction("Edit", this);
-    //    QAction* deletePlayer = new QAction("Delete", this);
     connect(addToTeam, SIGNAL(triggered()), this, SLOT(addToTeam()));
-    connect(editPlayer, SIGNAL(triggered()), this, SLOT(editPlayer()));
-    //    connect(deletePlayer, SIGNAL(triggered()), this,
-    //    SLOT(deletePlayer()));
     _menu->addAction(addToTeam);
-    _menu->addAction(editPlayer);
-    //    _menu->addAction(deletePlayer);
     connect(ui->table, SIGNAL(customContextMenuRequested(QPoint)), this,
             SLOT(slotCustomMenuRequested(QPoint)));
 }

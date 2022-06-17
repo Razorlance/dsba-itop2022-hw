@@ -2,8 +2,6 @@
 #define HELP_WINDOW_H
 
 #include <QPainter>
-#include <QTextDocument>
-#include <QWidget>
 
 #include "qdialog.h"
 namespace Ui
