@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>compare_window</class>
+ <class>compareWindow</class>
  <widget class="QDialog" name="compare_window">
   <property name="geometry">
    <rect>

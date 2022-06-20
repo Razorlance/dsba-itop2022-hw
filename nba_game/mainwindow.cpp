@@ -1,18 +1,18 @@
 #include "mainwindow.h"
 
 #include "./ui_mainwindow.h"
-#include "players_list.h"
+#include "playerslist.h"
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
-      _players(new players_list(this)),
-      _teamTable(new team_table(_players, this)),
-      _mtable(new main_table(_players, this)),
-      _team_window(new team_window(_players, _teamTable, this)),
+      _players(new PlayersList(this)),
+      _teamTable(new TeamTable(_players, this)),
+      _mtable(new MainTable(_players, this)),
+      _teamWindow(new TeamWindow(_players, _teamTable, this)),
       _menu(new QMenu(this)),
       _proxyModel(new QSortFilterProxyModel(this)),
-      _help_window(new help_window(this))
+      _helpWindow(new HelpWindow(this))
 {
     ui->setupUi(this);
     _proxyModel->setSourceModel(_mtable);
@@ -31,7 +31,7 @@ MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::slotCustomMenuRequested(QPoint pos) {}
 
-void MainWindow::on_team_button_clicked() { _team_window->show(); }
+void MainWindow::on_team_button_clicked() { _teamWindow->show(); }
 
 void MainWindow::on_search_button_clicked()
 {
@@ -95,7 +95,7 @@ void MainWindow::on_table_doubleClicked(const QModelIndex& indx)
     size_t index = ui->table->selectionModel()->selectedRows().at(0).row();
     size_t id =
         ui->table->model()->data(ui->table->model()->index(index, 0)).toInt();
-    player_window* pWindow = new player_window(_players, id, this);
+    PlayerWindow* pWindow = new PlayerWindow(_players, id, this);
     pWindow->show();
 }
 
@@ -121,9 +121,9 @@ void MainWindow::on_compare_button_clicked()
         size_t id2 = ui->table->model()
                          ->data(ui->table->model()->index(index2, 0))
                          .toInt();
-        compare_window* cWindow = new compare_window(_players, id1, id2, this);
+        CompareWindow* cWindow = new CompareWindow(_players, id1, id2, this);
         cWindow->show();
     }
 }
 
-void MainWindow::on_help_button_clicked() { _help_window->show(); }
+void MainWindow::on_help_button_clicked() { _helpWindow->show(); }

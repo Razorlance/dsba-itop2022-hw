@@ -1,28 +1,28 @@
-#ifndef TEAM_WINDOW_H
-#define TEAM_WINDOW_H
+#ifndef TEAMWINDOW_H
+#define TEAMWINDOW_H
 
 #include <QDialog>
 #include <QList>
 #include <QMenu>
 #include <QSortFilterProxyModel>
 
-#include "players_list.h"
-#include "team_table.h"
+#include "playerslist.h"
+#include "teamtable.h"
 
 namespace Ui
 {
-class team_window;
+class teamWindow;
 }
 
-class team_window : public QDialog
+class TeamWindow : public QDialog
 {
     Q_OBJECT
 
    public:
-    explicit team_window(players_list *players, team_table *_tTable,
+    explicit TeamWindow(PlayersList *players, TeamTable *_tTable,
                          QWidget *parent = nullptr);
 
-    ~team_window();
+    ~TeamWindow();
 
    private slots:
     void on_pushButton_clicked();
@@ -38,10 +38,10 @@ class team_window : public QDialog
     void on_team_table_customContextMenuRequested(const QPoint &pos);
 
    private:
-    Ui::team_window *ui;
-    team_table *_tTable;
-    players_list *_players;
+    Ui::teamWindow *ui;
+    TeamTable *_tTable;
+    PlayersList *_players;
     QMenu *_menu;
 };
 
-#endif  // TEAM_WINDOW_H
+#endif  // TEAMWINDOW_H

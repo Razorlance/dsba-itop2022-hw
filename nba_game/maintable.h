@@ -1,18 +1,19 @@
-#ifndef MAIN_TABLE_H
-#define MAIN_TABLE_H
+#ifndef MAINTABLE_H
+#define MAINTABLE_H
 
 #include <QAbstractTableModel>
 #include <QObject>
 
-#include "players_list.h"
-class main_table : public QAbstractTableModel
+#include "playerslist.h"
+
+class MainTable : public QAbstractTableModel
 {
     Q_OBJECT
    protected:
-    players_list* _players;
+    PlayersList* _players;
 
    public:
-    explicit main_table(players_list* players, QObject* parent = nullptr);
+    explicit MainTable(PlayersList* players, QObject* parent = nullptr);
 
    public:
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
@@ -27,4 +28,4 @@ class main_table : public QAbstractTableModel
    signals:
 };
 
-#endif  // MAIN_TABLE_H
+#endif  // MAINTABLE_H

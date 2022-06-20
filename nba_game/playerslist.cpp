@@ -1,4 +1,4 @@
-#include "players_list.h"
+#include "playerslist.h"
 
 #include <QDebug>
 void Player::fillData(const QStringList& details)
@@ -78,23 +78,23 @@ QVariant Player::getTeamData(const QModelIndex& indx)
     }
 }
 
-players_list::players_list(QObject* parent)
-    : QObject{parent}, team_name{"New team"}
+PlayersList::PlayersList(QObject* parent)
+    : QObject{parent}, teamName{"New team"}
 {
 }
 
-QStringList players_list::getHeaders() { return headers; }
+QStringList PlayersList::getHeaders() { return headers; }
 
-QStringList players_list::getTeamHeaders() { return team_headers; }
+QStringList PlayersList::getTeamHeaders() { return teamHeaders; }
 
-Player players_list::getPlayer(size_t index) { return players.at(index); }
+Player PlayersList::getPlayer(size_t index) { return players.at(index); }
 
-QString players_list::getTeamName() { return team_name; }
+QString PlayersList::getTeamName() { return teamName; }
 
-QSet<Player> players_list::getTeam() { return team; };
-int players_list::getSize() { return players.size(); }
+QSet<Player> PlayersList::getTeam() { return team; };
+int PlayersList::getSize() { return players.size(); }
 
-bool players_list::loadFile(QFile& file)
+bool PlayersList::loadFile(QFile& file)
 {
     if (file.open(QIODevice::ReadOnly))
     {
@@ -114,10 +114,10 @@ bool players_list::loadFile(QFile& file)
         headers.append(h[14]);
         headers.append(h[21]);
         for (QString i : headers)
-            team_headers.append(i);
+            teamHeaders.append(i);
 
-        team_headers.append("is_captain");
-        team_headers.append("in_rotation");
+        teamHeaders.append("is_captain");
+        teamHeaders.append("in_rotation");
 
         while (!in.atEnd())
         {
@@ -133,7 +133,7 @@ bool players_list::loadFile(QFile& file)
     }
     return false;
 }
-QVariant players_list::getCell(const QModelIndex& indx)
+QVariant PlayersList::getCell(const QModelIndex& indx)
 {
     Player p = players.at(indx.row());
     QVariant data = p.getData(indx);
@@ -141,7 +141,7 @@ QVariant players_list::getCell(const QModelIndex& indx)
         return data;
     return QVariant();
 }
-QVariant players_list::getTeamCell(const QModelIndex& indx)
+QVariant PlayersList::getTeamCell(const QModelIndex& indx)
 {
     Player p = team.values().at(indx.row());
     QVariant data = p.getTeamData(indx);
@@ -150,7 +150,7 @@ QVariant players_list::getTeamCell(const QModelIndex& indx)
     return false;
 }
 
-void players_list::addToTeam(size_t index)
+void PlayersList::addToTeam(size_t index)
 {
     if (team.size() < 15)
     {
@@ -160,12 +160,12 @@ void players_list::addToTeam(size_t index)
     }
 }
 
-void players_list::deleteFromTeam(size_t id)
+void PlayersList::deleteFromTeam(size_t id)
 {
     team.erase(team.find(getPlayer(id)));
 }
 
-void players_list::deletePlayer(size_t id)
+void PlayersList::deletePlayer(size_t id)
 {
     players.erase(players.begin() + id, players.begin() + id + 1);
     //    for (size_t i = 0; i < players.size(); i++)
@@ -178,13 +178,13 @@ void players_list::deletePlayer(size_t id)
     //    players.removeAt(pos);
 }
 
-void players_list::changeTeamName(QString& name)
+void PlayersList::changeTeamName(QString& name)
 {
     if (name != "")
-        team_name = name;
+        teamName = name;
 }
 
-double players_list::countPTS()
+double PlayersList::countPTS()
 {
     double pts = 0;
     size_t count = 0;
@@ -199,7 +199,7 @@ double players_list::countPTS()
         return pts;
 }
 
-double players_list::countREB()
+double PlayersList::countREB()
 {
     double reb = 0;
     size_t count = 0;
@@ -213,7 +213,7 @@ double players_list::countREB()
     return reb;
 }
 
-double players_list::countAST()
+double PlayersList::countAST()
 {
     double ast = 0;
     size_t count = 0;
@@ -228,6 +228,6 @@ double players_list::countAST()
         return ast;
 }
 
-void players_list::toggle_captain(){
+void PlayersList::toggle_captain(){
 
 };

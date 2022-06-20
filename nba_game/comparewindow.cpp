@@ -1,10 +1,10 @@
-#include "compare_window.h"
+#include "comparewindow.h"
 
-#include "ui_compare_window.h"
+#include "ui_comparewindow.h"
 
-compare_window::compare_window(players_list *players, size_t id1, size_t id2,
+CompareWindow::CompareWindow(PlayersList *players, size_t id1, size_t id2,
                                QWidget *parent)
-    : QDialog(parent), ui(new Ui::compare_window)
+    : QDialog(parent), ui(new Ui::compareWindow)
 {
     ui->setupUi(this);
     Player p1 = players->getPlayer(id1);
@@ -23,6 +23,6 @@ compare_window::compare_window(players_list *players, size_t id1, size_t id2,
     ui->year_field_2->setText(p2.year);
 }
 
-compare_window::~compare_window() { delete ui; }
+CompareWindow::~CompareWindow() { delete ui; }
 
-void compare_window::on_close_button_clicked() { this->close(); }
+void CompareWindow::on_close_button_clicked() { this->close(); }

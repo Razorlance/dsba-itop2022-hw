@@ -19,24 +19,24 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        players_list.h
-        players_list.cpp
-        team_window.h
-        team_window.cpp
-        team_window.ui
-        main_table.h
-        main_table.cpp
-        player_window.h
-        player_window.cpp
-        player_window.ui
-        team_table.h
-        team_table.cpp
-        help_window.h
-        help_window.cpp
-        help_window.ui
-        compare_window.h
-        compare_window.cpp
-        compare_window.ui
+        playerslist.h
+        playerslist.cpp
+        teamwindow.h
+        teamwindow.cpp
+        teamwindow.ui
+        maintable.h
+        maintable.cpp
+        playerwindow.h
+        playerwindow.cpp
+        playerwindow.ui
+        teamtable.h
+        teamtable.cpp
+        helpwindow.h
+        helpwindow.cpp
+        helpwindow.ui
+        comparewindow.h
+        comparewindow.cpp
+        comparewindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

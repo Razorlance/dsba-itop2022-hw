@@ -1,16 +1,16 @@
-#include "help_window.h"
+#include "helpwindow.h"
 
-#include "ui_help_window.h"
+#include "ui_helpwindow.h"
 
-help_window::help_window(QWidget *parent)
-    : QDialog(parent), ui(new Ui::help_window)
+HelpWindow::HelpWindow(QWidget *parent)
+    : QDialog(parent), ui(new Ui::helpWindow)
 {
     ui->setupUi(this);
 }
 
-help_window::~help_window() { delete ui; }
+HelpWindow::~HelpWindow() { delete ui; }
 
-void help_window::paintEvent(QPaintEvent *event)
+void HelpWindow::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     QPen pen(Qt::white, 10, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);

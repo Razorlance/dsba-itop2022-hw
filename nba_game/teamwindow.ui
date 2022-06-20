@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>team_window</class>
+ <class>teamWindow</class>
  <widget class="QDialog" name="team_window">
   <property name="geometry">
    <rect>

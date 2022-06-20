@@ -10,13 +10,13 @@
 #include <QStandardItemModel>
 #include <QTableView>
 
-#include "compare_window.h"
-#include "help_window.h"
-#include "main_table.h"
-#include "player_window.h"
-#include "players_list.h"
-#include "team_table.h"
-#include "team_window.h"
+#include "comparewindow.h"
+#include "helpwindow.h"
+#include "maintable.h"
+#include "playerwindow.h"
+#include "playerslist.h"
+#include "teamtable.h"
+#include "teamwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -58,14 +58,14 @@ class MainWindow : public QMainWindow
     void on_help_button_clicked();
 
    protected:
-    players_list *_players;
-    main_table *_mtable;
-    team_table *_teamTable;
+    PlayersList *_players;
+    MainTable *_mtable;
+    TeamTable *_teamTable;
 
-    team_window *_team_window;
-    player_window *_player_window;
-    help_window *_help_window;
-    compare_window *_compare_window;
+    TeamWindow *_teamWindow;
+    PlayerWindow *_playerWindow;
+    HelpWindow *_helpWindow;
+    CompareWindow *_compareWindow;
 
     QMenu *_menu;
     QSortFilterProxyModel *_proxyModel;

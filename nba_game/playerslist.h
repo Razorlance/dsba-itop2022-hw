@@ -1,5 +1,5 @@
-#ifndef PLAYERS_LIST_H
-#define PLAYERS_LIST_H
+#ifndef PLAYERSLIST_H
+#define PLAYERSLIST_H
 
 #include <QFile>
 #include <QFileDialog>
@@ -27,11 +27,11 @@ struct Player
     QVariant getTeamData(const QModelIndex& indx);
 };
 
-class players_list : public QObject
+class PlayersList : public QObject
 {
     Q_OBJECT
    public:
-    explicit players_list(QObject* parent = nullptr);
+    explicit PlayersList(QObject* parent = nullptr);
 
    public:
     bool loadFile(QFile& fileName);
@@ -57,8 +57,8 @@ class players_list : public QObject
     QList<Player> players;
     QSet<Player> team;
     QStringList headers;
-    QStringList team_headers;
-    QString team_name;
+    QStringList teamHeaders;
+    QString teamName;
    signals:
 };
 inline bool operator==(const Player& e1, const Player& e2)
@@ -71,4 +71,4 @@ inline uint qHash(const Player& key, uint seed)
     return qHash(key.id, seed) ^ key.age;
 }
 
-#endif  // PLAYERS_LIST_H
+#endif  // PLAYERSLIST_H

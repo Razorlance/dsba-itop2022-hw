@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>player_window</class>
+ <class>playerWindow</class>
  <widget class="QWidget" name="player_window">
   <property name="geometry">
    <rect>

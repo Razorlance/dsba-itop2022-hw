@@ -1,26 +1,26 @@
-#include "team_table.h"
+#include "teamtable.h"
 
-team_table::team_table(players_list* players, QObject* parent)
+TeamTable::TeamTable(PlayersList* players, QObject* parent)
     : QAbstractTableModel{parent}, _players(players)
 {
 }
-int team_table::rowCount(const QModelIndex& parent) const
+int TeamTable::rowCount(const QModelIndex& parent) const
 {
     return _players->getTeam().size();
 };
-int team_table::columnCount(const QModelIndex& parent) const
+int TeamTable::columnCount(const QModelIndex& parent) const
 {
     return _players->getTeamHeaders().size();
 };
 
-QVariant team_table::data(const QModelIndex& indx, int role) const
+QVariant TeamTable::data(const QModelIndex& indx, int role) const
 {
     if (role == Qt::DisplayRole)
         return _players->getTeamCell(indx);
     return QVariant();
 };
-QVariant team_table::headerData(int section, Qt::Orientation orientation,
-                                int role) const
+QVariant TeamTable::headerData(int section, Qt::Orientation orientation,
+                               int role) const
 {
     if (role != Qt::DisplayRole)
         return QVariant();

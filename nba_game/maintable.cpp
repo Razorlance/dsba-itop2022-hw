@@ -1,26 +1,26 @@
-#include "main_table.h"
+#include "maintable.h"
 
-main_table::main_table(players_list* players, QObject* parent)
+MainTable::MainTable(PlayersList* players, QObject* parent)
     : QAbstractTableModel{parent}, _players{players}
 {
 }
-int main_table::rowCount(const QModelIndex& parent) const
+int MainTable::rowCount(const QModelIndex& parent) const
 {
     return _players->getSize();
 };
-int main_table::columnCount(const QModelIndex& parent) const
+int MainTable::columnCount(const QModelIndex& parent) const
 {
     return _players->getHeaders().size();
 };
 
-QVariant main_table::data(const QModelIndex& indx, int role) const
+QVariant MainTable::data(const QModelIndex& indx, int role) const
 {
     if (role == Qt::DisplayRole)
         return _players->getCell(indx);
     return QVariant();
 };
-QVariant main_table::headerData(int section, Qt::Orientation orientation,
-                                int role) const
+QVariant MainTable::headerData(int section, Qt::Orientation orientation,
+                               int role) const
 {
     if (role != Qt::DisplayRole)
         return QVariant();

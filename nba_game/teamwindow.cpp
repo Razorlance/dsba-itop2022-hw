@@ -1,11 +1,11 @@
-#include "team_window.h"
+#include "teamwindow.h"
 
-#include "ui_team_window.h"
+#include "ui_teamwindow.h"
 
-team_window::team_window(players_list *players, team_table *_teamTable,
-                         QWidget *parent)
+TeamWindow::TeamWindow(PlayersList *players, TeamTable *_teamTable,
+                       QWidget *parent)
     : QDialog(parent),
-      ui(new Ui::team_window),
+      ui(new Ui::teamWindow),
       _players(players),
       _tTable(_teamTable),
       _menu(new QMenu(this))
@@ -30,9 +30,9 @@ team_window::team_window(players_list *players, team_table *_teamTable,
     ui->team_table->setSortingEnabled(true);
 }
 
-team_window::~team_window() { delete ui; }
+TeamWindow::~TeamWindow() { delete ui; }
 
-void team_window::on_pushButton_clicked()
+void TeamWindow::on_pushButton_clicked()
 {
     QString name = ui->team_name->text();
     _players->changeTeamName(name);
@@ -45,7 +45,7 @@ void team_window::on_pushButton_clicked()
     _tTable->layoutChanged();
 }
 
-void team_window::on_update_button_clicked()
+void TeamWindow::on_update_button_clicked()
 {
     _tTable->layoutAboutToBeChanged();
     _tTable->layoutChanged();
@@ -54,13 +54,13 @@ void team_window::on_update_button_clicked()
     ui->team_pts->setText(QString::number(_players->countPTS()));
 }
 
-void team_window::on_save_button_clicked()
+void TeamWindow::on_save_button_clicked()
 {
     QString name = ui->team_name->text();
     _players->changeTeamName(name);
 }
 
-void team_window::deletePlayer()
+void TeamWindow::deletePlayer()
 {
     size_t index = ui->team_table->selectionModel()->selectedRows().at(0).row();
     size_t id = ui->team_table->model()
@@ -71,12 +71,12 @@ void team_window::deletePlayer()
     _tTable->layoutChanged();
 }
 
-void team_window::slotCustomMenuRequested(QPoint pos)
+void TeamWindow::slotCustomMenuRequested(QPoint pos)
 {
     _menu->popup(ui->team_table->viewport()->mapToGlobal(pos));
 }
 
-void team_window::on_team_table_customContextMenuRequested(const QPoint &pos)
+void TeamWindow::on_team_table_customContextMenuRequested(const QPoint &pos)
 {
     _menu->popup(ui->team_table->viewport()->mapToGlobal(pos));
 }
