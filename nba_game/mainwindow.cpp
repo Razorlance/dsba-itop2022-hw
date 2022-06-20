@@ -7,8 +7,9 @@ MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
       _players(new players_list(this)),
+      _teamTable(new team_table(_players, this)),
       _mtable(new main_table(_players, this)),
-      _team_window(new team_window(_players, this)),
+      _team_window(new team_window(_players, _teamTable, this)),
       _menu(new QMenu(this)),
       _proxyModel(new QSortFilterProxyModel(this)),
       _help_window(new help_window(this))
@@ -55,7 +56,9 @@ void MainWindow::addToTeam()
     size_t index = ui->table->selectionModel()->selectedRows().at(0).row();
     size_t id =
         ui->table->model()->data(ui->table->model()->index(index, 0)).toInt();
+    _teamTable->layoutAboutToBeChanged();
     _players->addToTeam(id);
+    _teamTable->layoutChanged();
     if (_players->getTeam().size() == 15)
     {
         QMessageBox msgBox;

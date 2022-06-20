@@ -15,6 +15,7 @@
 #include "main_table.h"
 #include "player_window.h"
 #include "players_list.h"
+#include "team_table.h"
 #include "team_window.h"
 
 QT_BEGIN_NAMESPACE
@@ -59,6 +60,7 @@ class MainWindow : public QMainWindow
    protected:
     players_list *_players;
     main_table *_mtable;
+    team_table *_teamTable;
 
     team_window *_team_window;
     player_window *_player_window;

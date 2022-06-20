@@ -19,7 +19,8 @@ class team_window : public QDialog
     Q_OBJECT
 
    public:
-    explicit team_window(players_list *players, QWidget *parent = nullptr);
+    explicit team_window(players_list *players, team_table *_tTable,
+                         QWidget *parent = nullptr);
 
     ~team_window();
 

@@ -2,11 +2,12 @@
 
 #include "ui_team_window.h"
 
-team_window::team_window(players_list *players, QWidget *parent)
+team_window::team_window(players_list *players, team_table *_teamTable,
+                         QWidget *parent)
     : QDialog(parent),
       ui(new Ui::team_window),
       _players(players),
-      _tTable(new team_table(players, this)),
+      _tTable(_teamTable),
       _menu(new QMenu(this))
 {
     ui->setupUi(this);
