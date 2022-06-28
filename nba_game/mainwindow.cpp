@@ -6,13 +6,14 @@
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
+      _menu(new QMenu(this)),
       _players(new PlayersList(this)),
       _teamTable(new TeamTable(_players, this)),
       _mtable(new MainTable(_players, this)),
       _teamWindow(new TeamWindow(_players, _teamTable, this)),
-      _menu(new QMenu(this)),
       _proxyModel(new QSortFilterProxyModel(this)),
       _helpWindow(new HelpWindow(this))
+
 {
     ui->setupUi(this);
     _proxyModel->setSourceModel(_mtable);
@@ -25,6 +26,7 @@ MainWindow::MainWindow(QWidget* parent)
     _menu->addAction(addToTeam);
     connect(ui->table, SIGNAL(customContextMenuRequested(QPoint)), this,
             SLOT(slotCustomMenuRequested(QPoint)));
+    _teamsWindow = new TeamList(_players, _menu, this);
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -127,3 +129,5 @@ void MainWindow::on_compare_button_clicked()
 }
 
 void MainWindow::on_help_button_clicked() { _helpWindow->show(); }
+
+void MainWindow::on_teamsButton_clicked() { _teamsWindow->show(); }

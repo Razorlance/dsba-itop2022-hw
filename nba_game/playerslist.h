@@ -3,6 +3,7 @@
 
 #include <QFile>
 #include <QFileDialog>
+#include <QMap>
 #include <QObject>
 #include <QStandardItem>
 #include <QString>
@@ -48,9 +49,11 @@ class PlayersList : public QObject
     void toggle_captain();
     QStringList getHeaders();
     QStringList getTeamHeaders();
+    void appendTeam(const QString);
     Player getPlayer(size_t);
     QString getTeamName();
     QSet<Player> getTeam();
+    QStringList getTeamList();
 
    protected:
     bool one_captain;
@@ -59,6 +62,7 @@ class PlayersList : public QObject
     QStringList headers;
     QStringList teamHeaders;
     QString teamName;
+    QMap<QString, QList<QSet<Player>>> teams;
    signals:
 };
 inline bool operator==(const Player& e1, const Player& e2)

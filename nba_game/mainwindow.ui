@@ -90,6 +90,13 @@
            </spacer>
           </item>
           <item>
+           <widget class="QPushButton" name="teamsButton">
+            <property name="text">
+             <string>Teams</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="compare_button">
             <property name="text">
              <string>Compare</string>

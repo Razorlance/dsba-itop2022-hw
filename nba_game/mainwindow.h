@@ -13,8 +13,9 @@
 #include "comparewindow.h"
 #include "helpwindow.h"
 #include "maintable.h"
-#include "playerwindow.h"
 #include "playerslist.h"
+#include "playerwindow.h"
+#include "teamlist.h"
 #include "teamtable.h"
 #include "teamwindow.h"
 
@@ -57,6 +58,8 @@ class MainWindow : public QMainWindow
 
     void on_help_button_clicked();
 
+    void on_teamsButton_clicked();
+
    protected:
     PlayersList *_players;
     MainTable *_mtable;
@@ -66,7 +69,7 @@ class MainWindow : public QMainWindow
     PlayerWindow *_playerWindow;
     HelpWindow *_helpWindow;
     CompareWindow *_compareWindow;
-
+    TeamList *_teamsWindow;
     QMenu *_menu;
     QSortFilterProxyModel *_proxyModel;
 

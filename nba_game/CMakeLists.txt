@@ -11,7 +11,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/icon.png")
+set(app_icon_resource_windows "${PROJECT_BINARY_DIR}/icon.png")
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
@@ -39,6 +39,9 @@ set(PROJECT_SOURCES
         comparewindow.h
         comparewindow.cpp
         comparewindow.ui
+        teamlist.h
+        teamlist.cpp
+        teamlist.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
