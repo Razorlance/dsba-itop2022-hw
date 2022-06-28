@@ -8,7 +8,7 @@
 QT_BEGIN_NAMESPACE
 namespace Ui
 {
-class playerWindow;
+class PlayerWindow;
 }
 QT_END_NAMESPACE
 
@@ -26,7 +26,7 @@ class PlayerWindow : public QDialog
     void on_close_button1_clicked();
 
    private:
-    Ui::playerWindow *ui;
+    Ui::PlayerWindow *ui;
     PlayersList *_players;
     size_t id;
 };

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(nba_game VERSION 0.1 LANGUAGES CXX)
+project(NBAGame VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -10,6 +10,8 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/icon.png")
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
@@ -40,31 +42,31 @@ set(PROJECT_SOURCES
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(nba_game
+    qt_add_executable(NBAGame
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET nba_game APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#    set_property(TARGET NBAGame APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
-        add_library(nba_game SHARED
+        add_library(NBAGame SHARED
             ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(nba_game
+        add_executable(NBAGame
             ${PROJECT_SOURCES}
         )
     endif()
 endif()
 
-target_link_libraries(nba_game PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(NBAGame PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
-set_target_properties(nba_game PROPERTIES
+set_target_properties(NBAGame PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -73,5 +75,5 @@ set_target_properties(nba_game PROPERTIES
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(nba_game)
+    qt_finalize_executable(NBAGame)
 endif()

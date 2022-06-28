@@ -3,7 +3,7 @@
 #include "ui_playerwindow.h"
 
 PlayerWindow::PlayerWindow(PlayersList* players, size_t id, QWidget* parent)
-    : QDialog(parent), ui(new Ui::playerWindow), _players(players)
+    : QDialog(parent), ui(new Ui::PlayerWindow), _players(players)
 {
     ui->setupUi(this);
     Player p = players->getPlayer(id);

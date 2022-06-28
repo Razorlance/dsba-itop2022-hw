@@ -6,7 +6,7 @@
 #include "qdialog.h"
 namespace Ui
 {
-class helpWindow;
+class HelpWindow;
 }
 
 class HelpWindow : public QDialog
@@ -21,7 +21,7 @@ class HelpWindow : public QDialog
     void paintEvent(QPaintEvent *event);
 
    private:
-    Ui::helpWindow *ui;
+    Ui::HelpWindow *ui;
 };
 
 #endif  // HELPWINDOW_H

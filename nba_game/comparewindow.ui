@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>compareWindow</class>
- <widget class="QDialog" name="compare_window">
+ <class>CompareWindow</class>
+ <widget class="QDialog" name="CompareWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Compare</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_19">
    <item>

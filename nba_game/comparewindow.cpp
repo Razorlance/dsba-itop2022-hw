@@ -3,8 +3,8 @@
 #include "ui_comparewindow.h"
 
 CompareWindow::CompareWindow(PlayersList *players, size_t id1, size_t id2,
-                               QWidget *parent)
-    : QDialog(parent), ui(new Ui::compareWindow)
+                             QWidget *parent)
+    : QDialog(parent), ui(new Ui::CompareWindow)
 {
     ui->setupUi(this);
     Player p1 = players->getPlayer(id1);

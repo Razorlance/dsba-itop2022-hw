@@ -6,7 +6,7 @@
 #include <QDialog>
 namespace Ui
 {
-class compareWindow;
+class CompareWindow;
 }
 
 class CompareWindow : public QDialog
@@ -22,7 +22,7 @@ class CompareWindow : public QDialog
     void on_close_button_clicked();
 
    private:
-    Ui::compareWindow *ui;
+    Ui::CompareWindow *ui;
 };
 
 #endif  // COMPAREWINDOW_H
