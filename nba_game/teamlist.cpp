@@ -20,7 +20,9 @@ TeamList::TeamList(PlayersList* players, TeamsTable* teamsTableModel,
     ui->setupUi(this);
     ui->teamlist->setModel(_teamsListModel);
     ui->playersTable->setModel(_teamsTableModel);
+    _teamsListModel->layoutAboutToBeChanged();
     _teamsListModel->setStringList(players->getTeamList());
+    _teamsListModel->layoutChanged();
     QAction* addTeam = new QAction("Create new team", this);
     QAction* deleteTeam = new QAction("Delete team", this);
     connect(addTeam, SIGNAL(triggered()), this, SLOT(newTeam()));
@@ -44,10 +46,10 @@ void TeamList::newTeam()
                               QLineEdit::Normal, "New team", &ok);
     if (ok && !text.isEmpty())
     {
-        _players->appendTeam(text);
         _teamsListModel->layoutAboutToBeChanged();
-
+        _players->appendTeam(text);
         _teamsListModel->setStringList(_players->getTeamList());
+        qDebug() << _players->getTeamList().size();
         _teamsListModel->layoutChanged();
         //        QAction* teamAction = new QAction("Add to " + text, this);
         //        _menu->addAction(teamAction);
@@ -66,8 +68,11 @@ void TeamList::deleteTeam()
     if (_players->getTeamList().size() > 1 &&
         ui->teamlist->selectionModel()->selectedRows().size() > 0)
     {
+        _teamsListModel->layoutAboutToBeChanged();
         _players->deleteSelectedTeam(teamName);
+        qDebug() << _players->getTeamList().size();
         _teamsListModel->setStringList(_players->getTeamList());
+        _teamsListModel->layoutChanged();
     }
 }
 
@@ -118,7 +123,6 @@ void TeamList::on_saveButton_clicked()
     objFlDlg.setAcceptMode(QFileDialog::AcceptSave);
     objFlDlg.selectFile("Team");
     QList<QLineEdit*> lst = objFlDlg.findChildren<QLineEdit*>();
-    qDebug() << lst.count();
     if (lst.count() == 1)
     {
         lst.at(0)->setReadOnly(true);
