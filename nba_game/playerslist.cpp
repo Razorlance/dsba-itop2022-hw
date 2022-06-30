@@ -1,6 +1,5 @@
 #include "playerslist.h"
 
-#include <QDebug>
 void Player::fillData(const QStringList& details)
 {
     id = details[0].toInt();
@@ -200,7 +199,6 @@ void PlayersList::addToTeam(size_t index)
     {
         Player p = players.at(index);
         team.insert(p);
-        // qDebug() << players.at(index).name;
     }
 }
 
@@ -232,14 +230,6 @@ void PlayersList::deleteSelectedTeam(QString teamName)
 void PlayersList::deletePlayer(size_t id)
 {
     players.erase(players.begin() + id, players.begin() + id + 1);
-    //    for (size_t i = 0; i < players.size(); i++)
-    //    {
-    //        if (players[i].id == id)
-    //        {
-    //            players.removeAt(i);
-    //        }
-    //    }
-    //    players.removeAt(pos);
 }
 
 void PlayersList::changeTeamName(QString& name)
@@ -321,7 +311,3 @@ int PlayersList::countWinner(QString& team1, QString& team2)
             return 3;
     }
 }
-
-void PlayersList::toggle_captain(){
-
-};

@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QDebug>
 #include <QFile>
 #include <QFileDialog>
 #include <QMainWindow>
@@ -38,8 +37,6 @@ class MainWindow : public QMainWindow
     void addToTeam();
 
     void addToSelectedTeam();
-
-    void editPlayer();
 
     void deletePlayer();
 

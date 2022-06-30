@@ -82,19 +82,6 @@ void MainWindow::addToSelectedTeam()
     _teamsTable->layoutAboutToBeChanged();
     _players->addToSelectedTeam(id, _players->getTeamName());
     _teamsTable->layoutChanged();
-    //    if (_players->getTeam().size() == 15)
-    //    {
-    //        QMessageBox msgBox;
-    //        msgBox.setText("Maximum players in the team");
-    //        msgBox.exec();
-    //    }
-}
-
-void MainWindow::editPlayer()
-{
-    //    size_t index =
-    //    ui->table->selectionModel()->selectedRows().at(0).data(); qDebug() <<
-    //    index; size_t id = _players->getPlayer(index).id;
 }
 
 void MainWindow::deletePlayer()

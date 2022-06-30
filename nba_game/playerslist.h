@@ -53,7 +53,6 @@ class PlayersList : public QObject
     double countAST();
     double countSelectedAST(QString&);
     int countWinner(QString&, QString&);
-    void toggle_captain();
     QStringList getHeaders();
     QStringList getTeamHeaders();
     void appendTeam(const QString);
