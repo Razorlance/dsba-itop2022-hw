@@ -87,11 +87,7 @@ QStringList PlayersList::getHeaders() { return headers; }
 
 QStringList PlayersList::getTeamHeaders() { return teamHeaders; }
 
-void PlayersList::appendTeam(const QString teamName)
-{
-    if (teams[teamName].isEmpty())
-        teams[teamName];
-}
+void PlayersList::appendTeam(const QString teamName) { teams[teamName]; }
 
 Player PlayersList::getPlayer(size_t index) { return players.at(index); }
 
@@ -123,6 +119,7 @@ QStringList PlayersList::getTeamList()
 void PlayersList::saveTeamsToFile(){
 
 };
+
 int PlayersList::getSize() { return players.size(); }
 
 bool PlayersList::loadFile(QFile& file)

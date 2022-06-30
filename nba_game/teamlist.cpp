@@ -44,8 +44,9 @@ void TeamList::newTeam()
                               QLineEdit::Normal, "New team", &ok);
     if (ok && !text.isEmpty())
     {
-        _teamsListModel->layoutAboutToBeChanged();
         _players->appendTeam(text);
+        _teamsListModel->layoutAboutToBeChanged();
+
         _teamsListModel->setStringList(_players->getTeamList());
         _teamsListModel->layoutChanged();
         //        QAction* teamAction = new QAction("Add to " + text, this);
@@ -61,6 +62,7 @@ void TeamList::deleteTeam()
     QString teamName = ui->teamlist->model()
                            ->data(ui->teamlist->model()->index(index, 0))
                            .toString();
+
     if (_players->getTeamList().size() > 1 &&
         ui->teamlist->selectionModel()->selectedRows().size() > 0)
     {
@@ -89,7 +91,8 @@ void TeamList::on_okButton_clicked() { this->close(); }
 
 void TeamList::on_teamlist_customContextMenuRequested(const QPoint& pos)
 {
-    _teamsMenu->popup(ui->teamlist->viewport()->mapToGlobal(pos));
+    if (ui->teamlist->selectionModel()->selectedRows().size() > 0)
+        _teamsMenu->popup(ui->teamlist->viewport()->mapToGlobal(pos));
 }
 
 void TeamList::on_teamlist_clicked(const QModelIndex& index)
