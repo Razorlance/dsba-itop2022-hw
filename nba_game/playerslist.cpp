@@ -89,9 +89,9 @@ QStringList PlayersList::getTeamHeaders() { return teamHeaders; }
 
 void PlayersList::appendTeam(const QString teamName) { teams[teamName]; }
 
-Player PlayersList::getPlayer(size_t index) { return players.at(index); }
+Player PlayersList::getPlayer(const size_t index) { return players.at(index); }
 
-Player PlayersList::getPlayerFromTeam(QString teamName, size_t id)
+Player PlayersList::getPlayerFromTeam(const QString& teamName, const size_t id)
 {
     if (teams.contains(teamName))
         for (Player p : teams[teamName])
@@ -106,7 +106,7 @@ QString PlayersList::getTeamName() { return teamName; }
 
 QSet<Player> PlayersList::getTeam() { return team; }
 
-QSet<Player> PlayersList::getSelectedTeam(QString teamName)
+QSet<Player> PlayersList::getSelectedTeam(const QString& teamName)
 {
     if (teams.contains(teamName))
         return teams[teamName];
@@ -182,7 +182,7 @@ QVariant PlayersList::getTeamCell(const QModelIndex& indx)
 }
 
 QVariant PlayersList::getSelectedTeamCell(const QModelIndex& indx,
-                                          QString teamName)
+                                          const QString& teamName)
 {
     Player p = teams[teamName].values().at(indx.row());
     QVariant data = p.getTeamData(indx);
@@ -191,7 +191,7 @@ QVariant PlayersList::getSelectedTeamCell(const QModelIndex& indx,
     return false;
 }
 
-void PlayersList::setTeamName(QString name) { teamName = name; }
+void PlayersList::setTeamName(const QString& name) { teamName = name; }
 
 void PlayersList::addToTeam(size_t index)
 {
@@ -202,7 +202,7 @@ void PlayersList::addToTeam(size_t index)
     }
 }
 
-void PlayersList::addToSelectedTeam(size_t index, QString teamName)
+void PlayersList::addToSelectedTeam(const size_t index, const QString& teamName)
 {
     if (teams[teamName].size() < 15)
     {
@@ -211,28 +211,27 @@ void PlayersList::addToSelectedTeam(size_t index, QString teamName)
     }
 }
 
-void PlayersList::deleteFromTeam(size_t id)
+void PlayersList::deleteFromTeam(const size_t id)
 {
     team.erase(team.find(getPlayer(id)));
 }
 
-void PlayersList::deleteFromSelectedTeam(QString teamName, size_t id)
+void PlayersList::deleteFromSelectedTeam(const QString& teamName,
+                                         const size_t id)
 {
     teams[teamName].erase(
         teams[teamName].find(getPlayerFromTeam(teamName, id)));
 }
 
-void PlayersList::deleteSelectedTeam(QString teamName)
+void PlayersList::deleteSelectedTeam(const QString& teamName)
 {
     QMap<QString, QSet<Player>>::const_iterator i;
     QSet<Player>::const_iterator j;
 
     for (j = teams[teamName].begin(); j != teams[teamName].end(); j++)
-    {
         teams[teamName].erase(j);
-    }
+
     teams.remove(teamName);
-    qDebug() << "done";
 }
 
 void PlayersList::deletePlayer(size_t id)
@@ -240,7 +239,7 @@ void PlayersList::deletePlayer(size_t id)
     players.erase(players.begin() + id, players.begin() + id + 1);
 }
 
-void PlayersList::changeTeamName(QString& name)
+void PlayersList::changeTeamName(const QString& name)
 {
     if (name != "")
         teamName = name;
@@ -290,7 +289,7 @@ double PlayersList::countAST()
         return ast;
 }
 
-double PlayersList::countSelectedAST(QString& team)
+double PlayersList::countSelectedAST(const QString& team)
 {
     double ast = 0;
     size_t count = 0;
@@ -305,7 +304,7 @@ double PlayersList::countSelectedAST(QString& team)
         return ast;
 }
 
-int PlayersList::countWinner(QString& team1, QString& team2)
+int PlayersList::countWinner(const QString& team1, const QString& team2)
 {
     double ast1 = countSelectedAST(team1);
     double ast2 = countSelectedAST(team2);
