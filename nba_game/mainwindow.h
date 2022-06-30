@@ -75,6 +75,7 @@ class MainWindow : public QMainWindow
     QSortFilterProxyModel *_proxyModel;
 
    private:
+    void setUp();
     Ui::MainWindow *ui;
 };
 #endif  // MAINWINDOW_H

@@ -20,7 +20,7 @@ class TeamWindow : public QDialog
 
    public:
     explicit TeamWindow(PlayersList *players, TeamTable *_tTable,
-                         QWidget *parent = nullptr);
+                        QWidget *parent = nullptr);
 
     ~TeamWindow();
 
@@ -38,6 +38,7 @@ class TeamWindow : public QDialog
     void on_team_table_customContextMenuRequested(const QPoint &pos);
 
    private:
+    void setUp();
     Ui::teamWindow *ui;
     TeamTable *_tTable;
     PlayersList *_players;

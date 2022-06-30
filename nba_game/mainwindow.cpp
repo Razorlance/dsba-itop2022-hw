@@ -16,22 +16,7 @@ MainWindow::MainWindow(QWidget* parent)
       _helpWindow(new HelpWindow(this))
 
 {
-    ui->setupUi(this);
-    _proxyModel->setSourceModel(_mtable);
-    ui->table->setModel(_proxyModel);
-    ui->table->setSortingEnabled(true);
-    ui->table->verticalHeader()->setVisible(false);
-    ui->table->setContextMenuPolicy(Qt::CustomContextMenu);
-    QAction* addToTeam = new QAction("Add to favourite players", this);
-    QAction* addToSelectedTeam = new QAction("Add to selected team", this);
-    connect(addToTeam, SIGNAL(triggered()), this, SLOT(addToTeam()));
-    connect(addToSelectedTeam, SIGNAL(triggered()), this,
-            SLOT(addToSelectedTeam()));
-    _menu->addAction(addToTeam);
-    _menu->addAction(addToSelectedTeam);
-    connect(ui->table, SIGNAL(customContextMenuRequested(QPoint)), this,
-            SLOT(slotCustomMenuRequested(QPoint)));
-    _teamsWindow = new TeamList(_players, _teamsTable, _menu, this);
+    setUp();
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -139,3 +124,23 @@ void MainWindow::on_compare_button_clicked()
 void MainWindow::on_help_button_clicked() { _helpWindow->show(); }
 
 void MainWindow::on_teamsButton_clicked() { _teamsWindow->show(); }
+
+void MainWindow::setUp()
+{
+    ui->setupUi(this);
+    _proxyModel->setSourceModel(_mtable);
+    ui->table->setModel(_proxyModel);
+    ui->table->setSortingEnabled(true);
+    ui->table->verticalHeader()->setVisible(false);
+    ui->table->setContextMenuPolicy(Qt::CustomContextMenu);
+    QAction* addToTeam = new QAction("Add to favourite players", this);
+    QAction* addToSelectedTeam = new QAction("Add to selected team", this);
+    connect(addToTeam, SIGNAL(triggered()), this, SLOT(addToTeam()));
+    connect(addToSelectedTeam, SIGNAL(triggered()), this,
+            SLOT(addToSelectedTeam()));
+    _menu->addAction(addToTeam);
+    _menu->addAction(addToSelectedTeam);
+    connect(ui->table, SIGNAL(customContextMenuRequested(QPoint)), this,
+            SLOT(slotCustomMenuRequested(QPoint)));
+    _teamsWindow = new TeamList(_players, _teamsTable, _menu, this);
+}
