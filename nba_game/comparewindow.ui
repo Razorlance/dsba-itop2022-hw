@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Compare</string>
+   <string>Compare </string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_19">
    <item>
