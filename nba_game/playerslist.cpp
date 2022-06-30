@@ -93,11 +93,12 @@ Player PlayersList::getPlayer(size_t index) { return players.at(index); }
 
 Player PlayersList::getPlayerFromTeam(QString teamName, size_t id)
 {
-    for (Player p : teams[teamName])
-    {
-        if (p.id == id)
-            return p;
-    }
+    if (teams.contains(teamName))
+        for (Player p : teams[teamName])
+        {
+            if (p.id == id)
+                return p;
+        }
     return Player();
 }
 
@@ -107,7 +108,9 @@ QSet<Player> PlayersList::getTeam() { return team; }
 
 QSet<Player> PlayersList::getSelectedTeam(QString teamName)
 {
-    return teams[teamName];
+    if (teams.contains(teamName))
+        return teams[teamName];
+    return QSet<Player>();
 }
 
 QStringList PlayersList::getTeamList()
@@ -221,7 +224,15 @@ void PlayersList::deleteFromSelectedTeam(QString teamName, size_t id)
 
 void PlayersList::deleteSelectedTeam(QString teamName)
 {
+    QMap<QString, QSet<Player>>::const_iterator i;
+    QSet<Player>::const_iterator j;
+
+    for (j = teams[teamName].begin(); j != teams[teamName].end(); j++)
+    {
+        teams[teamName].erase(j);
+    }
     teams.remove(teamName);
+    qDebug() << "done";
 }
 
 void PlayersList::deletePlayer(size_t id)

@@ -24,8 +24,8 @@ void TournamentWindow::setTeam2(QString teamName) { team2 = teamName; }
 
 void TournamentWindow::update()
 {
-    ui->team1Name->setText(team1);
-    ui->team2Name->setText(team2);
+    ui->team1Name->setText(team1 + " (Team №1)");
+    ui->team2Name->setText(team2 + " (Team №2)");
     teamTable1Model->layoutAboutToBeChanged();
     teamTable1Model->setSelectedTeam(team1);
     teamTable1Model->layoutChanged();
