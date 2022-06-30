@@ -58,6 +58,7 @@ class PlayersList : public QObject
     QStringList getTeamHeaders();
     void appendTeam(const QString);
     Player getPlayer(size_t);
+    Player getPlayerFromTeam(QString, size_t);
     QString getTeamName();
     QSet<Player> getTeam();
     QSet<Player> getSelectedTeam(QString);

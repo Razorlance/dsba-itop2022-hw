@@ -96,6 +96,16 @@ void PlayersList::appendTeam(const QString teamName)
 
 Player PlayersList::getPlayer(size_t index) { return players.at(index); }
 
+Player PlayersList::getPlayerFromTeam(QString teamName, size_t id)
+{
+    for (Player p : teams[teamName])
+    {
+        if (p.id == id)
+            return p;
+    }
+    return Player();
+}
+
 QString PlayersList::getTeamName() { return teamName; }
 
 QSet<Player> PlayersList::getTeam() { return team; }
@@ -210,7 +220,8 @@ void PlayersList::deleteFromTeam(size_t id)
 
 void PlayersList::deleteFromSelectedTeam(QString teamName, size_t id)
 {
-    teams[teamName].erase(teams[teamName].find(getPlayer(id)));
+    teams[teamName].erase(
+        teams[teamName].find(getPlayerFromTeam(teamName, id)));
 }
 
 void PlayersList::deleteSelectedTeam(QString teamName)
