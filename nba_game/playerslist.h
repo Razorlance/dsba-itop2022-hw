@@ -58,6 +58,7 @@ class PlayersList : public QObject
     QSet<Player> getTeam();
     QSet<Player> getSelectedTeam(QString);
     QStringList getTeamList();
+    void saveTeamsToFile();
 
    protected:
     bool one_captain;

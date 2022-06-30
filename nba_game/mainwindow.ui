@@ -38,6 +38,23 @@
        <layout class="QHBoxLayout" name="horizontalLayout" stretch="300,50">
         <item>
          <widget class="QLineEdit" name="search_input">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="baseSize">
+           <size>
+            <width>10</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string/>
           </property>
@@ -48,6 +65,12 @@
         </item>
         <item>
          <widget class="QPushButton" name="search_button">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
           <property name="text">
            <string>Search</string>
           </property>
@@ -116,7 +139,7 @@
           <item>
            <widget class="QPushButton" name="team_button">
             <property name="text">
-             <string>Team</string>
+             <string>Favorite players</string>
             </property>
            </widget>
           </item>

@@ -106,7 +106,12 @@ QSet<Player> PlayersList::getSelectedTeam(QString teamName)
     return teams[teamName];
 }
 
-QStringList PlayersList::getTeamList() { return teams.keys(); };
+QStringList PlayersList::getTeamList() { return teams.keys(); }
+
+void PlayersList::saveTeamsToFile()
+{
+
+};
 int PlayersList::getSize() { return players.size(); }
 
 bool PlayersList::loadFile(QFile& file)

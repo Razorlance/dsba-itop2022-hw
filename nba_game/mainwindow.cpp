@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget* parent)
     ui->table->setSortingEnabled(true);
     ui->table->verticalHeader()->setVisible(false);
     ui->table->setContextMenuPolicy(Qt::CustomContextMenu);
-    QAction* addToTeam = new QAction("Add to team", this);
+    QAction* addToTeam = new QAction("Add to favourite players", this);
     QAction* addToSelectedTeam = new QAction("Add to selected team", this);
     connect(addToTeam, SIGNAL(triggered()), this, SLOT(addToTeam()));
     connect(addToSelectedTeam, SIGNAL(triggered()), this,

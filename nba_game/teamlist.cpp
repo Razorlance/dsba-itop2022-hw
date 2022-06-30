@@ -69,3 +69,37 @@ void TeamList::on_teamlist_clicked(const QModelIndex& index)
     _players->setTeamName(teamName);
     _teamsTableModel->layoutChanged();
 }
+
+void TeamList::on_saveButton_clicked()
+{
+    QFileDialog objFlDlg(this);
+    objFlDlg.setOption(QFileDialog::ShowDirsOnly, true);
+    objFlDlg.setAcceptMode(QFileDialog::AcceptSave);
+    objFlDlg.selectFile("Team");
+    QList<QLineEdit*> lst = objFlDlg.findChildren<QLineEdit*>();
+    qDebug() << lst.count();
+    if (lst.count() == 1)
+    {
+        lst.at(0)->setReadOnly(true);
+    }
+    if (objFlDlg.exec())
+    {
+        QFile file(objFlDlg.selectedFiles().at(0) + ".csv");
+        if (file.open(QIODevice::Append))
+        {
+            QTextStream stream(&file);
+            for (QString& k : _players->getTeamList())
+            {
+                stream << k << ";";
+                for (const Player& p : _players->getSelectedTeam(k))
+                {
+                    stream << p.id << " " << p.name << ",";
+                }
+                stream << "\n";
+            }
+        }
+        file.close();
+    }
+}
+
+void TeamList::on_tournamentButton_clicked() {}

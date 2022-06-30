@@ -33,6 +33,10 @@ class TeamList : public QDialog
 
     void on_teamlist_clicked(const QModelIndex &index);
 
+    void on_saveButton_clicked();
+
+    void on_tournamentButton_clicked();
+
    private:
     Ui::TeamList *ui;
     PlayersList *_players;
