@@ -21,8 +21,17 @@ CompareWindow::CompareWindow(PlayersList *players, size_t id1, size_t id2,
     ui->height_field_2->setText(QString::number(p2.height));
     ui->year_field->setText(p1.year);
     ui->year_field_2->setText(p2.year);
+    compareFields();
 }
 
 CompareWindow::~CompareWindow() { delete ui; }
 
 void CompareWindow::on_close_button_clicked() { this->close(); }
+
+void CompareWindow::compareFields()
+{
+    if (ui->age_field->text() != ui->age_field_2->text())
+    {
+        ui->age_field->setStyleSheet("color: white;  background-color: red");
+    }
+}

@@ -81,6 +81,8 @@ QVariant Player::getTeamData(const QModelIndex& indx)
 PlayersList::PlayersList(QObject* parent)
     : QObject{parent}, teamName{"New team"}
 {
+    teams.remove("");
+    teams["New team"];
 }
 
 QStringList PlayersList::getHeaders() { return headers; }
@@ -98,6 +100,11 @@ Player PlayersList::getPlayer(size_t index) { return players.at(index); }
 QString PlayersList::getTeamName() { return teamName; }
 
 QSet<Player> PlayersList::getTeam() { return team; }
+
+QSet<Player> PlayersList::getSelectedTeam(QString teamName)
+{
+    return teams[teamName];
+}
 
 QStringList PlayersList::getTeamList() { return teams.keys(); };
 int PlayersList::getSize() { return players.size(); }
@@ -158,6 +165,18 @@ QVariant PlayersList::getTeamCell(const QModelIndex& indx)
     return false;
 }
 
+QVariant PlayersList::getSelectedTeamCell(const QModelIndex& indx,
+                                          QString teamName)
+{
+    Player p = teams[teamName].values().at(indx.row());
+    QVariant data = p.getTeamData(indx);
+    if (data.data())
+        return data;
+    return false;
+}
+
+void PlayersList::setTeamName(QString name) { teamName = name; }
+
 void PlayersList::addToTeam(size_t index)
 {
     if (team.size() < 15)
@@ -165,6 +184,15 @@ void PlayersList::addToTeam(size_t index)
         Player p = players.at(index);
         team.insert(p);
         // qDebug() << players.at(index).name;
+    }
+}
+
+void PlayersList::addToSelectedTeam(size_t index, QString teamName)
+{
+    if (teams[teamName].size() < 15)
+    {
+        Player p = players.at(index);
+        teams[teamName].insert(p);
     }
 }
 

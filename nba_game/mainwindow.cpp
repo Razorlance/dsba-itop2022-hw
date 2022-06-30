@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget* parent)
       _menu(new QMenu(this)),
       _players(new PlayersList(this)),
       _teamTable(new TeamTable(_players, this)),
+      _teamsTable(new TeamsTable(_players, this)),
       _mtable(new MainTable(_players, this)),
       _teamWindow(new TeamWindow(_players, _teamTable, this)),
       _proxyModel(new QSortFilterProxyModel(this)),
@@ -22,11 +23,15 @@ MainWindow::MainWindow(QWidget* parent)
     ui->table->verticalHeader()->setVisible(false);
     ui->table->setContextMenuPolicy(Qt::CustomContextMenu);
     QAction* addToTeam = new QAction("Add to team", this);
+    QAction* addToSelectedTeam = new QAction("Add to selected team", this);
     connect(addToTeam, SIGNAL(triggered()), this, SLOT(addToTeam()));
+    connect(addToSelectedTeam, SIGNAL(triggered()), this,
+            SLOT(addToSelectedTeam()));
     _menu->addAction(addToTeam);
+    _menu->addAction(addToSelectedTeam);
     connect(ui->table, SIGNAL(customContextMenuRequested(QPoint)), this,
             SLOT(slotCustomMenuRequested(QPoint)));
-    _teamsWindow = new TeamList(_players, _menu, this);
+    _teamsWindow = new TeamList(_players, _teamsTable, _menu, this);
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -67,6 +72,22 @@ void MainWindow::addToTeam()
         msgBox.setText("Maximum players in the team");
         msgBox.exec();
     }
+}
+
+void MainWindow::addToSelectedTeam()
+{
+    size_t index = ui->table->selectionModel()->selectedRows().at(0).row();
+    size_t id =
+        ui->table->model()->data(ui->table->model()->index(index, 0)).toInt();
+    _teamsTable->layoutAboutToBeChanged();
+    _players->addToSelectedTeam(id, _players->getTeamName());
+    _teamsTable->layoutChanged();
+    //    if (_players->getTeam().size() == 15)
+    //    {
+    //        QMessageBox msgBox;
+    //        msgBox.setText("Maximum players in the team");
+    //        msgBox.exec();
+    //    }
 }
 
 void MainWindow::editPlayer()

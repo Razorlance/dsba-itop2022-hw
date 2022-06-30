@@ -39,7 +39,10 @@ class PlayersList : public QObject
     int getSize();
     QVariant getCell(const QModelIndex&);
     QVariant getTeamCell(const QModelIndex&);
+    QVariant getSelectedTeamCell(const QModelIndex&, QString);
+    void setTeamName(QString);
     void addToTeam(size_t);
+    void addToSelectedTeam(size_t, QString);
     void deleteFromTeam(size_t);
     void deletePlayer(size_t);
     void changeTeamName(QString&);
@@ -53,6 +56,7 @@ class PlayersList : public QObject
     Player getPlayer(size_t);
     QString getTeamName();
     QSet<Player> getTeam();
+    QSet<Player> getSelectedTeam(QString);
     QStringList getTeamList();
 
    protected:
@@ -62,7 +66,8 @@ class PlayersList : public QObject
     QStringList headers;
     QStringList teamHeaders;
     QString teamName;
-    QMap<QString, QList<QSet<Player>>> teams;
+    QString selectedTeam;
+    QMap<QString, QSet<Player>> teams;
    signals:
 };
 inline bool operator==(const Player& e1, const Player& e2)

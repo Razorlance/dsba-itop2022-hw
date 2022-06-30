@@ -15,11 +15,12 @@ class CompareWindow : public QDialog
 
    public:
     explicit CompareWindow(PlayersList *players, size_t id1, size_t id2,
-                            QWidget *parent = nullptr);
+                           QWidget *parent = nullptr);
     ~CompareWindow();
 
    private slots:
     void on_close_button_clicked();
+    void compareFields();
 
    private:
     Ui::CompareWindow *ui;

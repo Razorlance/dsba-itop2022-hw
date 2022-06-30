@@ -9,7 +9,7 @@
 #include <QWidget>
 
 #include "playerslist.h"
-
+#include "teamstable.h"
 namespace Ui
 {
 class TeamList;
@@ -20,8 +20,8 @@ class TeamList : public QDialog
     Q_OBJECT
 
    public:
-    explicit TeamList(PlayersList *players, QMenu *_menu,
-                      QWidget *parent = nullptr);
+    explicit TeamList(PlayersList *players, TeamsTable *_teamsTableModel,
+                      QMenu *_menu, QWidget *parent = nullptr);
     ~TeamList();
 
    private slots:
@@ -31,10 +31,13 @@ class TeamList : public QDialog
 
     void on_teamlist_customContextMenuRequested(const QPoint &pos);
 
+    void on_teamlist_clicked(const QModelIndex &index);
+
    private:
     Ui::TeamList *ui;
     PlayersList *_players;
-    QStringListModel *teamsListModel;
+    QStringListModel *_teamsListModel;
+    TeamsTable *_teamsTableModel;
     QMenu *_menu;
     QMenu *_teamsMenu;
 };

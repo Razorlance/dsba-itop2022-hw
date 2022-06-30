@@ -4,18 +4,21 @@
 
 #include "ui_teamlist.h"
 
-TeamList::TeamList(PlayersList* players, QMenu* menu, QWidget* parent)
+TeamList::TeamList(PlayersList* players, TeamsTable* teamsTableModel,
+                   QMenu* menu, QWidget* parent)
     : QDialog(parent),
       ui(new Ui::TeamList),
       _players(players),
       _menu(menu),
-      teamsListModel(new QStringListModel()),
+      _teamsTableModel(teamsTableModel),
+      _teamsListModel(new QStringListModel()),
       _teamsMenu(new QMenu)
 
 {
     ui->setupUi(this);
-    ui->teamlist->setModel(teamsListModel);
-    teamsListModel->setStringList(players->getTeamList());
+    ui->teamlist->setModel(_teamsListModel);
+    ui->playersTable->setModel(_teamsTableModel);
+    _teamsListModel->setStringList(players->getTeamList());
     QAction* addTeam = new QAction("Create new team", this);
     connect(addTeam, SIGNAL(triggered()), this, SLOT(newTeam()));
     _teamsMenu->addAction(addTeam);
@@ -33,13 +36,14 @@ void TeamList::newTeam()
                               QLineEdit::Normal, "New team", &ok);
     if (ok && !text.isEmpty())
     {
-        teamsListModel->layoutAboutToBeChanged();
+        _teamsListModel->layoutAboutToBeChanged();
         _players->appendTeam(text);
-        teamsListModel->setStringList(_players->getTeamList());
-        teamsListModel->layoutChanged();
-        QAction* teamAction = new QAction("Add to " + text, this);
-        _menu->addAction(teamAction);
-        connect(teamAction, SIGNAL(triggered()), parent(), SLOT(AddToTeam()));
+        _teamsListModel->setStringList(_players->getTeamList());
+        _teamsListModel->layoutChanged();
+        //        QAction* teamAction = new QAction("Add to " + text, this);
+        //        _menu->addAction(teamAction);
+        //        connect(teamAction, SIGNAL(triggered()), parent(),
+        //        SLOT(AddToTeam()));
     }
 }
 
@@ -48,4 +52,20 @@ void TeamList::on_okButton_clicked() { this->close(); }
 void TeamList::on_teamlist_customContextMenuRequested(const QPoint& pos)
 {
     _teamsMenu->popup(ui->teamlist->viewport()->mapToGlobal(pos));
+}
+
+void TeamList::on_teamlist_clicked(const QModelIndex& index)
+{
+    //    size_t index =
+    //    ui->teamlist->selectionModel()->selectedRows().at(0).row(); size_t
+    //    index =
+    //        ui->_teamsListModel->selectionModel()->selectedRows().at(0).row();
+
+    QString teamName = ui->teamlist->model()->data(index).toString();
+    //               ui->table->model()->data(ui->table->model()->index(index,
+    //        0)).toInt();
+    _teamsTableModel->layoutAboutToBeChanged();
+    _teamsTableModel->setSelectedTeam(teamName);
+    _players->setTeamName(teamName);
+    _teamsTableModel->layoutChanged();
 }

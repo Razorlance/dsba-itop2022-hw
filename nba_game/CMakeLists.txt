@@ -42,6 +42,8 @@ set(PROJECT_SOURCES
         teamlist.h
         teamlist.cpp
         teamlist.ui
+        teamstable.h
+        teamstable.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

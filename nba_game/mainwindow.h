@@ -16,6 +16,7 @@
 #include "playerslist.h"
 #include "playerwindow.h"
 #include "teamlist.h"
+#include "teamstable.h"
 #include "teamtable.h"
 #include "teamwindow.h"
 
@@ -35,6 +36,8 @@ class MainWindow : public QMainWindow
     ~MainWindow();
    private slots:
     void addToTeam();
+
+    void addToSelectedTeam();
 
     void editPlayer();
 
@@ -66,6 +69,7 @@ class MainWindow : public QMainWindow
     TeamTable *_teamTable;
 
     TeamWindow *_teamWindow;
+    TeamsTable *_teamsTable;
     PlayerWindow *_playerWindow;
     HelpWindow *_helpWindow;
     CompareWindow *_compareWindow;
