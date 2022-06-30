@@ -81,7 +81,6 @@ QVariant Player::getTeamData(const QModelIndex& indx)
 PlayersList::PlayersList(QObject* parent)
     : QObject{parent}, teamName{"New team"}
 {
-    teams.remove("");
     teams["New team"];
 }
 
@@ -106,10 +105,13 @@ QSet<Player> PlayersList::getSelectedTeam(QString teamName)
     return teams[teamName];
 }
 
-QStringList PlayersList::getTeamList() { return teams.keys(); }
-
-void PlayersList::saveTeamsToFile()
+QStringList PlayersList::getTeamList()
 {
+    teams.remove("");
+    return teams.keys();
+}
+
+void PlayersList::saveTeamsToFile(){
 
 };
 int PlayersList::getSize() { return players.size(); }
@@ -206,6 +208,16 @@ void PlayersList::deleteFromTeam(size_t id)
     team.erase(team.find(getPlayer(id)));
 }
 
+void PlayersList::deleteFromSelectedTeam(QString teamName, size_t id)
+{
+    teams[teamName].erase(teams[teamName].find(getPlayer(id)));
+}
+
+void PlayersList::deleteSelectedTeam(QString teamName)
+{
+    teams.remove(teamName);
+}
+
 void PlayersList::deletePlayer(size_t id)
 {
     players.erase(players.begin() + id, players.begin() + id + 1);
@@ -267,6 +279,36 @@ double PlayersList::countAST()
         return ast / count;
     else
         return ast;
+}
+
+double PlayersList::countSelectedAST(QString& team)
+{
+    double ast = 0;
+    size_t count = 0;
+    for (const Player& p : teams[team])
+    {
+        ast += p.reb;
+        count++;
+    }
+    if (count != 0)
+        return ast / count;
+    else
+        return ast;
+}
+
+int PlayersList::countWinner(QString& team1, QString& team2)
+{
+    double ast1 = countSelectedAST(team1);
+    double ast2 = countSelectedAST(team2);
+    if (ast1 > ast2)
+        return 1;
+    else
+    {
+        if (ast1 < ast2)
+            return 2;
+        else
+            return 3;
+    }
 }
 
 void PlayersList::toggle_captain(){

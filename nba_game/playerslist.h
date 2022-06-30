@@ -44,11 +44,15 @@ class PlayersList : public QObject
     void addToTeam(size_t);
     void addToSelectedTeam(size_t, QString);
     void deleteFromTeam(size_t);
+    void deleteFromSelectedTeam(QString, size_t);
+    void deleteSelectedTeam(QString);
     void deletePlayer(size_t);
     void changeTeamName(QString&);
     double countPTS();
     double countREB();
     double countAST();
+    double countSelectedAST(QString&);
+    int countWinner(QString&, QString&);
     void toggle_captain();
     QStringList getHeaders();
     QStringList getTeamHeaders();

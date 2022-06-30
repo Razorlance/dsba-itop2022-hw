@@ -10,6 +10,8 @@
 
 #include "playerslist.h"
 #include "teamstable.h"
+#include "tournamentwindow.h"
+
 namespace Ui
 {
 class TeamList;
@@ -25,7 +27,12 @@ class TeamList : public QDialog
     ~TeamList();
 
    private slots:
+
     void newTeam();
+
+    void deleteTeam();
+
+    void deleteFromTeam();
 
     void on_okButton_clicked();
 
@@ -37,12 +44,16 @@ class TeamList : public QDialog
 
     void on_tournamentButton_clicked();
 
+    void on_playersTable_customContextMenuRequested(const QPoint &pos);
+
    private:
     Ui::TeamList *ui;
     PlayersList *_players;
     QStringListModel *_teamsListModel;
     TeamsTable *_teamsTableModel;
+    TournamentWindow *_tournamentWindow;
     QMenu *_menu;
+    QMenu *_tableMenu;
     QMenu *_teamsMenu;
 };
 

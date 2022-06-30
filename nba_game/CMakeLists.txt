@@ -44,6 +44,9 @@ set(PROJECT_SOURCES
         teamlist.ui
         teamstable.h
         teamstable.cpp
+        tournamentwindow.h
+        tournamentwindow.cpp
+        tournamentwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

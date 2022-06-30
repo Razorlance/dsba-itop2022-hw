@@ -130,16 +130,16 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="help_button">
+           <widget class="QPushButton" name="team_button">
             <property name="text">
-             <string>Help</string>
+             <string>Favorite players</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="team_button">
+           <widget class="QPushButton" name="help_button">
             <property name="text">
-             <string>Favorite players</string>
+             <string>Help</string>
             </property>
            </widget>
           </item>
