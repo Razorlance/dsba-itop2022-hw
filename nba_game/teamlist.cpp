@@ -49,12 +49,7 @@ void TeamList::newTeam()
         _teamsListModel->layoutAboutToBeChanged();
         _players->appendTeam(text);
         _teamsListModel->setStringList(_players->getTeamList());
-        qDebug() << _players->getTeamList().size();
         _teamsListModel->layoutChanged();
-        //        QAction* teamAction = new QAction("Add to " + text, this);
-        //        _menu->addAction(teamAction);
-        //        connect(teamAction, SIGNAL(triggered()), parent(),
-        //        SLOT(AddToTeam()));
     }
 }
 
@@ -70,7 +65,6 @@ void TeamList::deleteTeam()
     {
         _teamsListModel->layoutAboutToBeChanged();
         _players->deleteSelectedTeam(teamName);
-        qDebug() << _players->getTeamList().size();
         _teamsListModel->setStringList(_players->getTeamList());
         _teamsListModel->layoutChanged();
     }
@@ -102,14 +96,7 @@ void TeamList::on_teamlist_customContextMenuRequested(const QPoint& pos)
 
 void TeamList::on_teamlist_clicked(const QModelIndex& index)
 {
-    //    size_t index =
-    //    ui->teamlist->selectionModel()->selectedRows().at(0).row(); size_t
-    //    index =
-    //        ui->_teamsListModel->selectionModel()->selectedRows().at(0).row();
-
     QString teamName = ui->teamlist->model()->data(index).toString();
-    //               ui->table->model()->data(ui->table->model()->index(index,
-    //        0)).toInt();
     _teamsTableModel->layoutAboutToBeChanged();
     _teamsTableModel->setSelectedTeam(teamName);
     _players->setTeamName(teamName);
